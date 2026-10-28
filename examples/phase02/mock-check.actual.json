@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "kind": "model_connection_check",
+  "timestamp": "2026-10-28T03:43:02.899252+00:00",
+  "mode": "mock",
+  "diagnostic_status": "passed",
+  "evidence_scope": "flow_only",
+  "scripted": true,
+  "not_an_agent_acceptance_result": true,
+  "model": "offline-mock",
+  "content": "OK",
+  "tool_calls": [],
+  "finish_reason": "stop",
+  "usage": {}
+}

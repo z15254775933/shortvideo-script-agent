@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "tool": "estimate_duration",
+  "evidence_scope": "business_tool_only",
+  "status": "ok",
+  "result": {
+    "tool": "estimate_duration",
+    "script_revision": 2,
+    "script_sha256": "d2d8775d5edba75f2b126982e4504d60841db6721a202022a2dea210a4a81f7b",
+    "passed": false,
+    "summary": "预计时长超过上限，需要修改脚本或说明无法满足",
+    "details": {
+      "target_duration_seconds": 10,
+      "estimated_total_seconds": 13.7,
+      "over_by_seconds": 3.7,
+      "scenes": [
+        {
+          "scene_id": "S01",
+          "voiceover_seconds": 2.4,
+          "subtitle_reading_seconds": 0.8,
+          "min_visual_seconds": 4,
+          "pause_seconds": 0.5,
+          "estimated_duration_seconds": 4.5
+        },
+        {
+          "scene_id": "S02",
+          "voiceover_seconds": 2.7,
+          "subtitle_reading_seconds": 2.0,
+          "min_visual_seconds": 5,
+          "pause_seconds": 0.5,
+          "estimated_duration_seconds": 5.5
+        },
+        {
+          "scene_id": "S03",
+          "voiceover_seconds": 3.2,
+          "subtitle_reading_seconds": 2.4,
+          "min_visual_seconds": 3,
+          "pause_seconds": 0.5,
+          "estimated_duration_seconds": 3.7
+        }
+      ],
+      "policy": {
+        "spoken_characters_per_second": 4.0,
+        "spoken_words_per_second": 2.5,
+        "reading_characters_per_second": 5.0,
+        "reading_words_per_second": 3.0,
+        "punctuation_pause_seconds": 0.2
+      },
+      "method": "每镜 max(旁白含标点停顿的时长, 字幕阅读时长, 必要画面占用) + 额外停顿，向上取整到0.1秒后求和。",
+      "limitations": [
+        "中文及其他非英文文字按字符、数字逐位、英文按单词估算；不能代表实际成片时长。",
+        "忽略输入脚本中自报的估时；旁白与字幕同时呈现，取较长值而非相加。"
+      ]
+    }
+  }
+}

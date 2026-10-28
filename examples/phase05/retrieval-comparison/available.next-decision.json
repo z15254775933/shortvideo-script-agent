@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "kind": "controlled_next_decision",
+  "mode": "real",
+  "evidence_scope": "single_step_after_replayed_prefix",
+  "branch": "available",
+  "timestamp": "2026-10-28T04:42:52.774441+00:00",
+  "common_prefix_sha256": "2e97999ab45df07403bb7e96f02118f66d84901b1b961bfba1db7fe853e9e040",
+  "changed_variable": "retrieval_results",
+  "actual_new_model_calls": 1,
+  "tool_observations": [
+    {
+      "tool_call_id": "call_00_nF44BMQXHzEEcadlt2jV0015",
+      "arguments": {
+        "query": "字幕功能 自动识别 编辑",
+        "limit": 10
+      },
+      "observation": {
+        "schema_version": 1,
+        "tool": "search_materials",
+        "evidence_scope": "business_tool_only",
+        "status": "ok",
+        "result": {
+          "query": "字幕功能 自动识别 编辑",
+          "product_id": "demo_editor",
+          "materials_synthetic": true,
+          "matched_count": 2,
+          "returned_count": 2,
+          "truncated": false,
+          "matches": [
+            {
+              "material_id": "P01",
+              "product_id": "demo_editor",
+              "title": "字幕功能资料",
+              "tags": [
+                "字幕",
+                "短视频",
+                "功能介绍"
+              ],
+              "facts": [
+                {
+                  "fact_id": "P01-F01",
+                  "statement": "支持字幕",
+                  "qualifiers": []
+                }
+              ],
+              "score": 3
+            },
+            {
+              "material_id": "P02",
+              "product_id": "demo_editor",
+              "title": "字幕文字编辑资料",
+              "tags": [
+                "字幕",
+                "文字",
+                "手动编辑"
+              ],
+              "facts": [
+                {
+                  "fact_id": "P02-F01",
+                  "statement": "支持手动修改字幕文字",
+                  "qualifiers": []
+                }
+              ],
+              "score": 2
+            }
+          ],
+          "grounding_policy": {
+            "name": "exact_source_and_editorial_allowlist_v1",
+            "description": "产品事实须逐字引用素材及全部限定；其余文案仅使用下列连接短语。未知表述会被拦截，不代表其一定为假。",
+            "neutral_titles": [
+              "功能演示",
+              "产品功能介绍",
+              "创作功能小课堂",
+              "一起看功能"
+            ],
+            "neutral_visuals": [
+              "展示片头标题",
+              "展示所引素材中的功能说明",
+              "展示旁白对应的素材原文",
+              "展示分镜字幕",
+              "展示结束卡片",
+              "镜头推近",
+              "镜头切换",
+              "画面渐入",
+              "画面渐出"
+            ],
+            "neutral_copy": [
+              "先看功能",
+              "再看细节",
+              "接下来",
+              "一起看看吧",
+              "按需选择",
+              "看看是否适合你的创作需求",
+              "完成后再检查一遍",
+              "先看清楚再动手",
+              "这里展示素材中的产品说明",
+              "今天先看到这里",
+              "字幕先别急",
+              "一步一步来",
+              "效果以实际使用为准",
+              "演示画面仅供参考"
+            ]
+          },
+          "limitations": [
+            "本地关键词检索，不进行语义推断；命中素材不代表查询中的其他能力已获证实。"
+          ]
+        }
+      }
+    },
+    {
+      "tool_call_id": "call_01_wwcKEF1kF5CN2Spd5zau4984",
+      "arguments": {
+        "query": "字幕 样式 字体 时间轴",
+        "limit": 10
+      },
+      "observation": {
+        "schema_version": 1,
+        "tool": "search_materials",
+        "evidence_scope": "business_tool_only",
+        "status": "ok",
+        "result": {
+          "query": "字幕 样式 字体 时间轴",
+          "product_id": "demo_editor",
+          "materials_synthetic": true,
+          "matched_count": 2,
+          "returned_count": 2,
+          "truncated": false,
+          "matches": [
+            {
+              "material_id": "P01",
+              "product_id": "demo_editor",
+              "title": "字幕功能资料",
+              "tags": [
+                "字幕",
+                "短视频",
+                "功能介绍"
+              ],
+              "facts": [
+                {
+                  "fact_id": "P01-F01",
+                  "statement": "支持字幕",
+                  "qualifiers": []
+                }
+              ],
+              "score": 1
+            },
+            {
+              "material_id": "P02",
+              "product_id": "demo_editor",
+              "title": "字幕文字编辑资料",
+              "tags": [
+                "字幕",
+                "文字",
+                "手动编辑"
+              ],
+              "facts": [
+                {
+                  "fact_id": "P02-F01",
+                  "statement": "支持手动修改字幕文字",
+                  "qualifiers": []
+                }
+              ],
+              "score": 1
+            }
+          ],
+          "grounding_policy": {
+            "name": "exact_source_and_editorial_allowlist_v1",
+            "description": "产品事实须逐字引用素材及全部限定；其余文案仅使用下列连接短语。未知表述会被拦截，不代表其一定为假。",
+            "neutral_titles": [
+              "功能演示",
+              "产品功能介绍",
+              "创作功能小课堂",
+              "一起看功能"
+            ],
+            "neutral_visuals": [
+              "展示片头标题",
+              "展示所引素材中的功能说明",
+              "展示旁白对应的素材原文",
+              "展示分镜字幕",
+              "展示结束卡片",
+              "镜头推近",
+              "镜头切换",
+              "画面渐入",
+              "画面渐出"
+            ],
+            "neutral_copy": [
+              "先看功能",
+              "再看细节",
+              "接下来",
+              "一起看看吧",
+              "按需选择",
+              "看看是否适合你的创作需求",
+              "完成后再检查一遍",
+              "先看清楚再动手",
+              "这里展示素材中的产品说明",
+              "今天先看到这里",
+              "字幕先别急",
+              "一步一步来",
+              "效果以实际使用为准",
+              "演示画面仅供参考"
+            ]
+          },
+          "limitations": [
+            "本地关键词检索，不进行语义推断；命中素材不代表查询中的其他能力已获证实。"
+          ]
+        }
+      }
+    }
+  ],
+  "does_not_execute_next_actions": true,
+  "diagnostic_status": "ok",
+  "reply": {
+    "model": "deepseek-flash",
+    "content": "只有两条事实可用，我据此安排镜头。",
+    "tool_calls": [
+      {
+        "id": "call_00_BxZ3vumNjgOOIDUZY4Di1039",
+        "type": "function",
+        "function": {
+          "name": "estimate_duration",
+          "arguments": "{\"reason_summary\": \"估算首版字幕功能脚本时长是否符合30秒目标。\", \"script\": {\"schema_version\": 1, \"revision\": 1, \"title\": \"创作功能小课堂\", \"scenes\": [{\"scene_id\": \"s1\", \"visual\": \"展示片头标题\", \"voiceover\": \"先看功能。\", \"subtitle\": \"先看功能\", \"pause_seconds\": 0.5, \"min_visual_seconds\": 2, \"estimated_duration_seconds\": null, \"citations\": []}, {\"scene_id\": \"s2\", \"visual\": \"展示所引素材中的功能说明\", \"voiceover\": \"支持字幕。\", \"subtitle\": \"支持字幕\", \"pause_seconds\": 0.8, \"min_visual_seconds\": 3, \"estimated_duration_seconds\": null, \"citations\": [{\"material_id\": \"P01\", \"fact_id\": \"P01-F01\", \"claim\": \"支持字幕\"}]}, {\"scene_id\": \"s3\", \"visual\": \"展示旁白对应的素材原文\", \"voiceover\": \"支持手动修改字幕文字。\", \"subtitle\": \"支持手动修改字幕文字\", \"pause_seconds\": 0.8, \"min_visual_seconds\": 3, \"estimated_duration_seconds\": null, \"citations\": [{\"material_id\": \"P02\", \"fact_id\": \"P02-F01\", \"claim\": \"支持手动修改字幕文字\"}]}, {\"scene_id\": \"s4\", \"visual\": \"展示分镜字幕\", \"voiceover\": \"字幕先别急，一步一步来。\", \"subtitle\": \"字幕先别急，一步一步来\", \"pause_seconds\": 0.8, \"min_visual_seconds\": 3, \"estimated_duration_seconds\": null, \"citations\": []}, {\"scene_id\": \"s5\", \"visual\": \"展示结束卡片\", \"voiceover\": \"按需选择，看看是否适合你的创作需求。\", \"subtitle\": \"按需选择，看看是否适合你的创作需求\", \"pause_seconds\": 1, \"min_visual_seconds\": 3, \"estimated_duration_seconds\": null, \"citations\": []}]}}"
+        }
+      }
+    ],
+    "finish_reason": "tool_calls",
+    "usage": {
+      "prompt_tokens": 3894,
+      "completion_tokens": 538,
+      "total_tokens": 4432
+    }
+  }
+}

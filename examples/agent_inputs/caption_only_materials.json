@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "description": "无依据宣传数字的受控测试资料：只提供 P01 的支持字幕事实，没有效率、识别、价格或其它功能资料。",
+  "materials": [
+    {
+      "material_id": "P01",
+      "product_id": "demo_editor",
+      "title": "字幕功能资料",
+      "tags": ["字幕", "短视频", "功能介绍"],
+      "facts": [{"fact_id": "P01-F01", "statement": "支持字幕", "qualifiers": []}]
+    }
+  ]
+}

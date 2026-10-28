@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "revision": 1,
+  "title": "功能演示",
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "visual": "展示片头标题",
+      "voiceover": "字幕先别急，一步一步来。先看功能。支持字幕。这里展示素材中的产品说明。",
+      "subtitle": "支持字幕。",
+      "pause_seconds": 0.5,
+      "min_visual_seconds": 15,
+      "estimated_duration_seconds": 0.1,
+      "citations": [{"material_id": "P01", "fact_id": "P01-F01", "claim": "支持字幕"}]
+    },
+    {
+      "scene_id": "S02",
+      "visual": "展示所引素材中的功能说明",
+      "voiceover": "接下来，再看细节。支持手动修改字幕文字。完成后再检查一遍。",
+      "subtitle": "支持手动修改字幕文字。",
+      "pause_seconds": 0.5,
+      "min_visual_seconds": 15,
+      "estimated_duration_seconds": 0.1,
+      "citations": [{"material_id": "P02", "fact_id": "P02-F01", "claim": "支持手动修改字幕文字"}]
+    },
+    {
+      "scene_id": "S03",
+      "visual": "展示结束卡片",
+      "voiceover": "按需选择。看看是否适合你的创作需求。今天先看到这里。",
+      "subtitle": "看看是否适合你的创作需求。",
+      "pause_seconds": 0.5,
+      "min_visual_seconds": 12,
+      "estimated_duration_seconds": 0.1,
+      "citations": []
+    }
+  ],
+  "estimated_total_seconds": 1
+}

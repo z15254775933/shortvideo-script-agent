@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "product_id": "demo_editor",
+  "rules": [
+    {"rule_id": "B01", "kind": "forbidden_phrase", "value": "效率提升80%", "description": "合成品牌规则：不使用没有证据的效率宣传数字。此字面规则不替代事实核验。"},
+    {"rule_id": "B02", "kind": "forbidden_phrase", "value": "100%准确", "description": "合成品牌规则：禁止绝对准确率承诺。"},
+    {"rule_id": "B03", "kind": "forbidden_phrase", "value": "永久免费", "description": "合成品牌规则：未提供价格依据，不使用永久免费承诺。"}
+  ]
+}

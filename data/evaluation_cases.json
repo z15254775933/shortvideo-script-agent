@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {"id": "A01", "description": "正常生成、来源及最终同版本检查", "kind": "normal", "paths": ["examples/phase04/real-normal"]},
+    {"id": "A02", "description": "缺少目标时长时请求补充", "kind": "missing", "paths": ["examples/phase05/real-missing-duration"]},
+    {"id": "A03", "description": "无素材时不编造事实", "kind": "no_materials", "paths": ["examples/phase04/real-no-materials"]},
+    {"id": "A04", "description": "观察工具错误后由模型重试并完成", "kind": "tool_failure", "paths": ["examples/phase05/real-search-failure"]},
+    {"id": "A05", "description": "实际超时反馈后的改稿与重新估时", "kind": "time_repair", "paths": ["examples/phase04/real-overlong-repair"]},
+    {"id": "A06", "description": "仅支持字幕资料中无依据效率数字的检查与修正", "kind": "rule_repair", "paths": ["examples/phase05/real-unsupported-reviewed"]},
+    {"id": "A07", "description": "真实运行中达到模型与工具上限后明确未完成", "kind": "limits", "paths": ["examples/phase05/real-step-limit", "examples/phase05/real-tool-limit"]},
+    {"id": "C01", "description": "共享对话前缀下改变检索返回的真实下一步决策", "kind": "comparison", "paths": ["examples/phase05/retrieval-comparison", "examples/phase04/real-normal"]}
+  ]
+}

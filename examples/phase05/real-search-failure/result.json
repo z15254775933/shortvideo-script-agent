@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "run_id": "d95f8e64-1740-4327-98b5-cab1a06dc21a",
+  "mode": "real",
+  "status": "success",
+  "reason": "已交付修订版3字幕功能短视频脚本：5镜、标题「创作功能小课堂」，产品事实仅逐字引用P01-F01「支持字幕」与P02-F01「支持手动修改字幕文字」，其余文案为白名单连接短语。estimate_duration 预计19.3秒（目标30秒内，passed=true），check_rules 通过（同一 revision 3、同一 script_sha256）。",
+  "brief": {
+    "schema_version": 1,
+    "topic": "介绍演示剪辑工具的字幕功能",
+    "audience": "刚开始制作短视频的创作者",
+    "platform": "抖音",
+    "target_duration_seconds": 30,
+    "style": "简洁自然，不夸张",
+    "product_id": "demo_editor"
+  },
+  "script": {
+    "estimated_total_seconds": 19.3,
+    "revision": 3,
+    "schema_version": 1,
+    "scenes": [
+      {
+        "citations": [],
+        "estimated_duration_seconds": 3.0,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.3,
+        "scene_id": "S1",
+        "subtitle": "先看功能·一起看看吧",
+        "visual": "展示片头标题",
+        "voiceover": "先看功能，一起看看吧。"
+      },
+      {
+        "citations": [
+          {
+            "claim": "支持字幕",
+            "fact_id": "P01-F01",
+            "material_id": "P01"
+          }
+        ],
+        "estimated_duration_seconds": 2.7,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.3,
+        "scene_id": "S2",
+        "subtitle": "支持字幕",
+        "visual": "展示所引素材中的功能说明",
+        "voiceover": "先看功能：支持字幕。"
+      },
+      {
+        "citations": [
+          {
+            "claim": "支持手动修改字幕文字",
+            "fact_id": "P02-F01",
+            "material_id": "P02"
+          }
+        ],
+        "estimated_duration_seconds": 4.2,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.3,
+        "scene_id": "S3",
+        "subtitle": "支持手动修改字幕文字",
+        "visual": "展示旁白对应的素材原文",
+        "voiceover": "再看细节：支持手动修改字幕文字。"
+      },
+      {
+        "citations": [],
+        "estimated_duration_seconds": 4.9,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.3,
+        "scene_id": "S4",
+        "subtitle": "按需选择·看看是否适合你的创作需求",
+        "visual": "展示分镜字幕",
+        "voiceover": "接下来，一步一步来，完成后再检查一遍。"
+      },
+      {
+        "citations": [],
+        "estimated_duration_seconds": 4.5,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.3,
+        "scene_id": "S5",
+        "subtitle": "今天先看到这里",
+        "visual": "展示结束卡片",
+        "voiceover": "今天先看到这里，演示画面仅供参考。"
+      }
+    ],
+    "title": "创作功能小课堂"
+  },
+  "checks": [
+    {
+      "tool": "check_rules",
+      "script_revision": 3,
+      "script_sha256": "469ad0c00692f9d57b2122a1aab38497c6a45a5f2bd7ada7965c1edebc2eab18",
+      "passed": true,
+      "summary": "品牌规则及保守事实核验通过",
+      "details": {
+        "product_id": "demo_editor",
+        "materials_synthetic": true,
+        "rules_synthetic": true,
+        "issues": [],
+        "verified_citations": [
+          {
+            "scene_id": "S2",
+            "claim": "支持字幕",
+            "fact_id": "P01-F01",
+            "material_id": "P01"
+          },
+          {
+            "scene_id": "S3",
+            "claim": "支持手动修改字幕文字",
+            "fact_id": "P02-F01",
+            "material_id": "P02"
+          }
+        ],
+        "grounding_policy": {
+          "name": "exact_source_and_editorial_allowlist_v1",
+          "description": "产品事实须逐字引用素材及全部限定；其余文案仅使用下列连接短语。未知表述会被拦截，不代表其一定为假。",
+          "neutral_titles": [
+            "功能演示",
+            "产品功能介绍",
+            "创作功能小课堂",
+            "一起看功能"
+          ],
+          "neutral_visuals": [
+            "展示片头标题",
+            "展示所引素材中的功能说明",
+            "展示旁白对应的素材原文",
+            "展示分镜字幕",
+            "展示结束卡片",
+            "镜头推近",
+            "镜头切换",
+            "画面渐入",
+            "画面渐出"
+          ],
+          "neutral_copy": [
+            "先看功能",
+            "再看细节",
+            "接下来",
+            "一起看看吧",
+            "按需选择",
+            "看看是否适合你的创作需求",
+            "完成后再检查一遍",
+            "先看清楚再动手",
+            "这里展示素材中的产品说明",
+            "今天先看到这里",
+            "字幕先别急",
+            "一步一步来",
+            "效果以实际使用为准",
+            "演示画面仅供参考"
+          ]
+        },
+        "limitations": [
+          "采用素材原句与有限连接短语白名单，不能验证任意自然语言同义改写，可能拦截无害文案。",
+          "仅检查提供素材内部的一致性，不证明素材本身真实；不分析图片或视频像素。"
+        ]
+      }
+    },
+    {
+      "tool": "estimate_duration",
+      "script_revision": 3,
+      "script_sha256": "469ad0c00692f9d57b2122a1aab38497c6a45a5f2bd7ada7965c1edebc2eab18",
+      "passed": true,
+      "summary": "预计时长符合上限",
+      "details": {
+        "target_duration_seconds": 30,
+        "estimated_total_seconds": 19.3,
+        "over_by_seconds": 0.0,
+        "scenes": [
+          {
+            "scene_id": "S1",
+            "voiceover_seconds": 2.7,
+            "subtitle_reading_seconds": 1.8,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.3,
+            "estimated_duration_seconds": 3.0
+          },
+          {
+            "scene_id": "S2",
+            "voiceover_seconds": 2.4,
+            "subtitle_reading_seconds": 0.8,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.3,
+            "estimated_duration_seconds": 2.7
+          },
+          {
+            "scene_id": "S3",
+            "voiceover_seconds": 3.9,
+            "subtitle_reading_seconds": 2.0,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.3,
+            "estimated_duration_seconds": 4.2
+          },
+          {
+            "scene_id": "S4",
+            "voiceover_seconds": 4.6,
+            "subtitle_reading_seconds": 3.2,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.3,
+            "estimated_duration_seconds": 4.9
+          },
+          {
+            "scene_id": "S5",
+            "voiceover_seconds": 4.2,
+            "subtitle_reading_seconds": 1.4,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.3,
+            "estimated_duration_seconds": 4.5
+          }
+        ],
+        "policy": {
+          "spoken_characters_per_second": 4.0,
+          "spoken_words_per_second": 2.5,
+          "reading_characters_per_second": 5.0,
+          "reading_words_per_second": 3.0,
+          "punctuation_pause_seconds": 0.2
+        },
+        "method": "每镜 max(旁白含标点停顿的时长, 字幕阅读时长, 必要画面占用) + 额外停顿，向上取整到0.1秒后求和。",
+        "limitations": [
+          "中文及其他非英文文字按字符、数字逐位、英文按单词估算；不能代表实际成片时长。",
+          "忽略输入脚本中自报的估时；旁白与字幕同时呈现，取较长值而非相加。"
+        ]
+      }
+    }
+  ],
+  "risks": [
+    "素材库仅有2条字幕相关事实（支持字幕、支持手动修改字幕文字），脚本未涉及自动识别、样式模板、导出等能力，如需展开需补充素材。",
+    "白名单限制使片头无法使用「创作功能小课堂」以外的自定义开场语，口播表达较为克制。",
+    "预计19.3秒低于30秒目标，若需贴近满时长，需补充更多已核验的字幕事实或增加演示细节镜头。",
+    "估时为规则计算值，不代表实际成片时长。",
+    "时长是固定规则下的估算，不代表实际成片；事实检查采用保守字面政策。",
+    "本次资料为合成产品资料，不代表真实产品能力。"
+  ],
+  "requests_for_input": []
+}

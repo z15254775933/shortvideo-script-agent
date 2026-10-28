@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "tool": "check_rules",
+  "evidence_scope": "business_tool_only",
+  "status": "ok",
+  "result": {
+    "tool": "check_rules",
+    "script_revision": 2,
+    "script_sha256": "d2d8775d5edba75f2b126982e4504d60841db6721a202022a2dea210a4a81f7b",
+    "passed": true,
+    "summary": "品牌规则及保守事实核验通过",
+    "details": {
+      "product_id": "demo_editor",
+      "materials_synthetic": true,
+      "rules_synthetic": true,
+      "issues": [],
+      "verified_citations": [
+        {
+          "scene_id": "S01",
+          "material_id": "P01",
+          "fact_id": "P01-F01",
+          "claim": "支持字幕"
+        },
+        {
+          "scene_id": "S02",
+          "material_id": "P02",
+          "fact_id": "P02-F01",
+          "claim": "支持手动修改字幕文字"
+        }
+      ],
+      "grounding_policy": {
+        "name": "exact_source_and_editorial_allowlist_v1",
+        "description": "产品事实须逐字引用素材及全部限定；其余文案仅使用下列连接短语。未知表述会被拦截，不代表其一定为假。",
+        "neutral_titles": [
+          "功能演示",
+          "产品功能介绍",
+          "创作功能小课堂",
+          "一起看功能"
+        ],
+        "neutral_visuals": [
+          "展示片头标题",
+          "展示所引素材中的功能说明",
+          "展示旁白对应的素材原文",
+          "展示分镜字幕",
+          "展示结束卡片",
+          "镜头推近",
+          "镜头切换",
+          "画面渐入",
+          "画面渐出"
+        ],
+        "neutral_copy": [
+          "先看功能",
+          "再看细节",
+          "接下来",
+          "一起看看吧",
+          "按需选择",
+          "看看是否适合你的创作需求",
+          "完成后再检查一遍",
+          "先看清楚再动手",
+          "这里展示素材中的产品说明",
+          "今天先看到这里",
+          "字幕先别急",
+          "一步一步来",
+          "效果以实际使用为准",
+          "演示画面仅供参考"
+        ]
+      },
+      "limitations": [
+        "采用素材原句与有限连接短语白名单，不能验证任意自然语言同义改写，可能拦截无害文案。",
+        "仅检查提供素材内部的一致性，不证明素材本身真实；不分析图片或视频像素。"
+      ]
+    }
+  }
+}

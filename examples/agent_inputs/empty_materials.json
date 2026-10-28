@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "description": "真实模型无素材分支的受控输入，所有查询均没有可用产品资料；不是工具故障。",
+  "materials": []
+}

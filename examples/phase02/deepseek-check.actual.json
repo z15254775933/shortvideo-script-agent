@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "model_connection_check",
+  "timestamp": "2026-10-28T03:43:12.830349+00:00",
+  "mode": "real",
+  "diagnostic_status": "passed",
+  "evidence_scope": "authentication_and_text_only",
+  "scripted": false,
+  "not_an_agent_acceptance_result": true,
+  "model": "deepseek-flash",
+  "content": "OK",
+  "tool_calls": [],
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 9,
+    "completion_tokens": 1,
+    "total_tokens": 10
+  }
+}

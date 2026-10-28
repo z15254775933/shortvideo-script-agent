@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "tool": "search_materials",
+  "evidence_scope": "business_tool_only",
+  "status": "error",
+  "simulated_failure": true,
+  "error": {
+    "code": "injected_failure",
+    "message": "显式测试故障，未执行本次业务工具；没有自动重试",
+    "retryable": true
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "revision": 1,
+  "title": "功能演示",
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "visual": "展示所引素材中的功能说明",
+      "voiceover": "支持字幕，效率提升８０％。",
+      "subtitle": "支持字幕，效率提升８０％。",
+      "pause_seconds": 0.5,
+      "min_visual_seconds": 4,
+      "estimated_duration_seconds": null,
+      "citations": [{"material_id": "P01", "fact_id": "P01-F01", "claim": "支持字幕"}]
+    }
+  ],
+  "estimated_total_seconds": null
+}

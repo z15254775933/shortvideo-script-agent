@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "retrieval_decision_comparison",
+  "mode": "real",
+  "evidence_scope": "two_single_step_decisions_not_full_runs",
+  "actual_new_model_calls": 2,
+  "common_prefix_sha256": "2e97999ab45df07403bb7e96f02118f66d84901b1b961bfba1db7fe853e9e040",
+  "comparison_status": "observed",
+  "available_actions": [
+    {
+      "tool": "estimate_duration",
+      "arguments": {
+        "reason_summary": "估算首版字幕功能脚本时长是否符合30秒目标。",
+        "script": {
+          "schema_version": 1,
+          "revision": 1,
+          "title": "创作功能小课堂",
+          "scenes": [
+            {
+              "scene_id": "s1",
+              "visual": "展示片头标题",
+              "voiceover": "先看功能。",
+              "subtitle": "先看功能",
+              "pause_seconds": 0.5,
+              "min_visual_seconds": 2,
+              "estimated_duration_seconds": null,
+              "citations": []
+            },
+            {
+              "scene_id": "s2",
+              "visual": "展示所引素材中的功能说明",
+              "voiceover": "支持字幕。",
+              "subtitle": "支持字幕",
+              "pause_seconds": 0.8,
+              "min_visual_seconds": 3,
+              "estimated_duration_seconds": null,
+              "citations": [
+                {
+                  "material_id": "P01",
+                  "fact_id": "P01-F01",
+                  "claim": "支持字幕"
+                }
+              ]
+            },
+            {
+              "scene_id": "s3",
+              "visual": "展示旁白对应的素材原文",
+              "voiceover": "支持手动修改字幕文字。",
+              "subtitle": "支持手动修改字幕文字",
+              "pause_seconds": 0.8,
+              "min_visual_seconds": 3,
+              "estimated_duration_seconds": null,
+              "citations": [
+                {
+                  "material_id": "P02",
+                  "fact_id": "P02-F01",
+                  "claim": "支持手动修改字幕文字"
+                }
+              ]
+            },
+            {
+              "scene_id": "s4",
+              "visual": "展示分镜字幕",
+              "voiceover": "字幕先别急，一步一步来。",
+              "subtitle": "字幕先别急，一步一步来",
+              "pause_seconds": 0.8,
+              "min_visual_seconds": 3,
+              "estimated_duration_seconds": null,
+              "citations": []
+            },
+            {
+              "scene_id": "s5",
+              "visual": "展示结束卡片",
+              "voiceover": "按需选择，看看是否适合你的创作需求。",
+              "subtitle": "按需选择，看看是否适合你的创作需求",
+              "pause_seconds": 1,
+              "min_visual_seconds": 3,
+              "estimated_duration_seconds": null,
+              "citations": []
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "empty_actions": [
+    {
+      "tool": "search_materials",
+      "arguments": {
+        "query": "字幕",
+        "reason_summary": "用更宽泛的关键词再次检索字幕相关素材。",
+        "limit": 10
+      }
+    },
+    {
+      "tool": "search_materials",
+      "arguments": {
+        "query": "演示剪辑 功能说明",
+        "reason_summary": "检索演示剪辑工具的通用功能说明素材，确认素材库是否有可用内容。",
+        "limit": 10
+      }
+    }
+  ],
+  "limitations": [
+    "共享首轮工具选择来自已保存的真实运行；本次仅两个后续决策为新调用。",
+    "这是一组对照样本，不代表统计成功率；未执行新动作或宣告完整任务通过。"
+  ]
+}

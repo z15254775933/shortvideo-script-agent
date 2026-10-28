@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "description": "笔试用合成产品资料。演示剪辑工具为虚构产品；不代表小影或任何真实产品的能力。没有提供效率、准确率、价格或自动识别能力数据。",
+  "materials": [
+    {
+      "material_id": "P01",
+      "product_id": "demo_editor",
+      "title": "字幕功能资料",
+      "tags": ["字幕", "短视频", "功能介绍"],
+      "facts": [
+        {"fact_id": "P01-F01", "statement": "支持字幕", "qualifiers": []}
+      ]
+    },
+    {
+      "material_id": "P02",
+      "product_id": "demo_editor",
+      "title": "字幕文字编辑资料",
+      "tags": ["字幕", "文字", "手动编辑"],
+      "facts": [
+        {"fact_id": "P02-F01", "statement": "支持手动修改字幕文字", "qualifiers": []}
+      ]
+    }
+  ]
+}

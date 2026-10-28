@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "run_id": "b78a06f0-50e0-41d0-918d-b7d961be54df",
+  "mode": "mock",
+  "status": "incomplete",
+  "reason": "已达到工具调用次数上限",
+  "brief": {
+    "schema_version": 1,
+    "topic": "介绍演示剪辑工具的字幕功能",
+    "audience": "刚开始制作短视频的创作者",
+    "platform": "抖音",
+    "target_duration_seconds": 30,
+    "style": "简洁自然，不夸张",
+    "product_id": "demo_editor"
+  },
+  "script": null,
+  "checks": [],
+  "risks": [
+    "时长是固定规则下的估算，不代表实际成片；事实检查采用保守字面政策。",
+    "这是预设 Mock 执行流程，不证明真实模型决策效果。",
+    "本次资料为合成产品资料，不代表真实产品能力。"
+  ],
+  "requests_for_input": []
+}
