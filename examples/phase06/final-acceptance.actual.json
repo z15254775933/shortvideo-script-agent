@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "kind": "acceptance_evaluation",
+  "timestamp": "2026-10-28T05:45:50.793444+00:00",
+  "evidence_scope": "offline_audit_of_actual_saved_model_runs",
+  "new_model_calls": 0,
+  "total": 11,
+  "passed": 11,
+  "cases": [
+    {
+      "id": "A01",
+      "description": "正常生成、来源及最终同版本检查",
+      "evidence": [
+        "examples/phase04/real-normal"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "success",
+        "model_calls": 7,
+        "tool_calls": 8,
+        "estimated_seconds": 28.2
+      }
+    },
+    {
+      "id": "A02",
+      "description": "缺少目标时长时请求补充",
+      "evidence": [
+        "examples/phase05/real-missing-duration"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "needs_input",
+        "model_calls": 2,
+        "tool_calls": 2
+      }
+    },
+    {
+      "id": "A03",
+      "description": "无素材时不编造事实",
+      "evidence": [
+        "examples/phase04/real-no-materials"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "needs_input",
+        "model_calls": 4,
+        "tool_calls": 5,
+        "empty_retrievals": 4
+      }
+    },
+    {
+      "id": "A04",
+      "description": "观察工具错误后由模型重试并完成",
+      "evidence": [
+        "examples/phase05/real-search-failure"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "success",
+        "model_calls": 9,
+        "tool_calls": 10,
+        "estimated_seconds": 19.3,
+        "fault_event": 5,
+        "retry_event": 10
+      }
+    },
+    {
+      "id": "A05",
+      "description": "实际超时反馈后的改稿与重新估时",
+      "evidence": [
+        "examples/phase04/real-overlong-repair"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "success",
+        "model_calls": 5,
+        "tool_calls": 6,
+        "estimated_seconds": 24.0,
+        "before_seconds": 43.5,
+        "changed_draft_event": 16
+      }
+    },
+    {
+      "id": "A06",
+      "description": "仅支持字幕资料中无依据效率数字的检查与修正",
+      "evidence": [
+        "examples/phase05/real-unsupported-reviewed"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "success",
+        "model_calls": 4,
+        "tool_calls": 5,
+        "estimated_seconds": 21.9,
+        "rule_failure_event": 6,
+        "source_ids": [
+          "P01"
+        ]
+      }
+    },
+    {
+      "id": "A07",
+      "description": "真实运行中达到模型与工具上限后明确未完成",
+      "evidence": [
+        "examples/phase05/real-step-limit",
+        "examples/phase05/real-tool-limit"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "incomplete",
+        "model_calls": 1,
+        "tool_calls": 2,
+        "verified_limits": [
+          "model_steps",
+          "tool_calls"
+        ]
+      }
+    },
+    {
+      "id": "C01",
+      "description": "共享对话前缀下改变检索返回的真实下一步决策",
+      "evidence": [
+        "examples/phase05/retrieval-comparison",
+        "examples/phase04/real-normal"
+      ],
+      "passed": true,
+      "metrics": {
+        "available_tools": [
+          "estimate_duration"
+        ],
+        "empty_tools": [
+          "search_materials",
+          "search_materials"
+        ],
+        "new_model_calls": 2,
+        "full_task_results": false,
+        "common_prefix_sha256": "2e97999ab45df07403bb7e96f02118f66d84901b1b961bfba1db7fe853e9e040"
+      }
+    },
+    {
+      "id": "A08",
+      "description": "抖音情境脚本允许自由文案且独立审核通过",
+      "evidence": [
+        "examples/phase06/creative-douyin-final"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "success",
+        "model_calls": 6,
+        "tool_calls": 7,
+        "estimated_seconds": 25.8,
+        "review_model_calls": 1,
+        "total_model_calls": 7,
+        "elapsed_seconds": 22.253,
+        "tokens": {
+          "author": {
+            "prompt_tokens": 37200,
+            "completion_tokens": 3500,
+            "total_tokens": 40700
+          },
+          "review": {
+            "prompt_tokens": 1549,
+            "completion_tokens": 629,
+            "total_tokens": 2178
+          }
+        }
+      }
+    },
+    {
+      "id": "A09",
+      "description": "B站解释型脚本说明已知事实及资料边界",
+      "evidence": [
+        "examples/phase06/creative-bilibili"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "success",
+        "model_calls": 6,
+        "tool_calls": 7,
+        "estimated_seconds": 25.3,
+        "review_model_calls": 1,
+        "total_model_calls": 7,
+        "elapsed_seconds": 21.574,
+        "tokens": {
+          "author": {
+            "prompt_tokens": 40914,
+            "completion_tokens": 3410,
+            "total_tokens": 44324
+          },
+          "review": {
+            "prompt_tokens": 1543,
+            "completion_tokens": 659,
+            "total_tokens": 2202
+          }
+        }
+      }
+    },
+    {
+      "id": "A10",
+      "description": "无来源自动识别宣传经独立审核驳回后由模型改稿复查",
+      "evidence": [
+        "examples/phase06/creative-semantic-repair-valid"
+      ],
+      "passed": true,
+      "metrics": {
+        "status": "success",
+        "model_calls": 8,
+        "tool_calls": 9,
+        "estimated_seconds": 26.3,
+        "review_model_calls": 2,
+        "total_model_calls": 10,
+        "elapsed_seconds": 28.445,
+        "tokens": {
+          "author": {
+            "prompt_tokens": 74331,
+            "completion_tokens": 3868,
+            "total_tokens": 78199
+          },
+          "review": {
+            "prompt_tokens": 2481,
+            "completion_tokens": 950,
+            "total_tokens": 3431
+          }
+        },
+        "semantic_failure_event": 6
+      }
+    }
+  ],
+  "limitations": [
+    "验收针对已保存样本，不代表模型统计成功率或通用语义能力。创作模式重放已存审核，不重新裁决自然语言真值。",
+    "C01 是两个受控单步决策，不是两次完整 Agent 任务。"
+  ]
+}

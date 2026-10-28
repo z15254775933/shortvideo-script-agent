@@ -20,14 +20,14 @@ class EvaluationTests(unittest.TestCase):
 
     def test_all_acceptance_cases_have_real_evidence_and_pass_offline_audit(self):
         report = evaluate_manifest(self.manifest)
-        self.assertEqual({row["id"] for row in report["cases"]}, {"A01", "A02", "A03", "A04", "A05", "A06", "A07", "C01"})
+        self.assertEqual({row["id"] for row in report["cases"]}, {"A01", "A02", "A03", "A04", "A05", "A06", "A07", "C01", "A08", "A09", "A10"})
         self.assertEqual(report["passed"], report["total"], report)
         self.assertEqual(report["new_model_calls"], 0)
 
     def test_evaluation_needs_neither_credentials_nor_network(self):
         with patch.object(Settings, "load", side_effect=AssertionError("credentials accessed")), \
                 patch.object(DeepSeekClient, "complete", side_effect=AssertionError("network called")):
-            self.assertEqual(evaluate_manifest(self.manifest)["passed"], 8)
+            self.assertEqual(evaluate_manifest(self.manifest)["passed"], 11)
 
     def test_changed_duration_or_text_cannot_keep_old_passed_checks(self):
         directory = PROJECT_ROOT / "examples/phase04/real-normal"

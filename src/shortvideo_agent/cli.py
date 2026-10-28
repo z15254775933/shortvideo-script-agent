@@ -18,6 +18,7 @@ from .materials import load_assets
 from .models import DeepSeekClient, ModelError, OfflineMockClient
 from .mock import mock_client
 from .tools import ToolRegistry
+from .grounding import SemanticReviewer
 
 
 def parser() -> argparse.ArgumentParser:
@@ -50,10 +51,15 @@ def parser() -> argparse.ArgumentParser:
             command.add_argument("--limit", type=int, default=5)
         else:
             command.add_argument("--script", type=Path, required=True)
+        if name == "check":
+            command.add_argument("--writing-mode", choices=("strict", "creative"), default="strict")
+            command.add_argument("--env-file", type=Path, default=PROJECT_ROOT / ".env")
     run = commands.add_parser("run", help="Run the bounded agent and save result, trace, journal, and editable script")
     run.set_defaults(output=None)
     run.add_argument("--input", type=Path, required=True)
     run.add_argument("--mode", choices=("real", "mock"), default="mock")
+    run.add_argument("--writing-mode", choices=("strict", "creative"), help="Real defaults to creative; mock uses strict only")
+    run.add_argument("--max-review-calls", type=int, default=4, help="Independent model-review request cap, in addition to Agent steps")
     run.add_argument("--mock-scenario", choices=("normal", "repair"), default="normal")
     run.add_argument("--env-file", type=Path, default=PROJECT_ROOT / ".env")
     run.add_argument("--materials", type=Path, default=PROJECT_ROOT / "data/materials.json")
@@ -124,7 +130,10 @@ def run_tool(args: argparse.Namespace) -> tuple[dict, int]:
     brief = read_json(args.input, BRIEF)
     materials, rules = load_assets(args.materials, args.rules)
     name = {"search": "search_materials", "estimate": "estimate_duration", "check": "check_rules"}[args.tool_command]
-    registry = ToolRegistry(materials, rules, brief, failures={name: 1} if args.simulate_failure else None)
+    reviewer = None
+    if getattr(args, "writing_mode", "strict") == "creative":
+        reviewer = SemanticReviewer(DeepSeekClient(Settings.load(args.env_file, require_key=True)), max_calls=1)
+    registry = ToolRegistry(materials, rules, brief, failures={name: 1} if args.simulate_failure else None, reviewer=reviewer)
     arguments = {"query": args.query, "limit": args.limit} if args.tool_command == "search" else {
         "script": read_json(args.script, SCRIPT)}
     result = registry.call(name, arguments)
@@ -137,6 +146,11 @@ def run_agent(args: argparse.Namespace) -> tuple[dict, int]:
     brief = read_json(args.input, BRIEF)
     materials, rules = load_assets(args.materials, args.rules)
     initial = read_json(args.initial_script, SCRIPT) if args.initial_script else None
+    writing_mode = args.writing_mode or ("creative" if args.mode == "real" else "strict")
+    if args.max_review_calls < 1:
+        raise ValidationError("Review call limit must be positive")
+    if args.mode == "mock" and writing_mode != "strict":
+        raise ValidationError("Creative mode requires real model review; use strict for offline mock")
     if args.mode == "real":
         if args.mock_scenario != "normal":
             raise ValidationError("--mock-scenario only applies to mock runs")
@@ -151,7 +165,8 @@ def run_agent(args: argparse.Namespace) -> tuple[dict, int]:
             settings = replace(settings, **{field: value})
     if args.mode == "real":
         client = DeepSeekClient(settings)
-    registry = ToolRegistry(materials, rules, brief, failures={args.fail_once: 1} if args.fail_once else None)
+    reviewer = SemanticReviewer(DeepSeekClient(settings), max_calls=args.max_review_calls) if writing_mode == "creative" else None
+    registry = ToolRegistry(materials, rules, brief, failures={args.fail_once: 1} if args.fail_once else None, reviewer=reviewer)
     output_dir = args.output_dir or PROJECT_ROOT / "examples/runs" / uuid4().hex
     output_dir.mkdir(parents=True, exist_ok=False)
 
@@ -174,7 +189,9 @@ def run_agent(args: argparse.Namespace) -> tuple[dict, int]:
     return {"run_id": result["run_id"], "mode": result["mode"], "status": result["status"],
             "reason": result["reason"], "requests_for_input": result["requests_for_input"],
             "output_dir": str(output_dir.resolve()), "model_calls": trace["model_calls"],
-            "tool_calls": trace["tool_calls"]}, {"success": 0, "needs_input": 2}.get(result["status"], 3)
+            "tool_calls": trace["tool_calls"], "writing_mode": writing_mode,
+            "review_model_calls": reviewer.calls if reviewer else 0,
+            "total_model_calls": trace["model_calls"] + (reviewer.calls if reviewer else 0)}, {"success": 0, "needs_input": 2}.get(result["status"], 3)
 
 
 def main(argv: list[str] | None = None) -> int:

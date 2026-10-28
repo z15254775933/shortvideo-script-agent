@@ -1,0 +1,473 @@
+{
+  "schema_version": 1,
+  "run_id": "f01ec0a2-d0c1-4b3f-b1d5-eb06f1379dfc",
+  "mode": "real",
+  "status": "success",
+  "reason": "已基于 P01-F01「支持字幕」与 P02-F01「支持手动修改字幕文字」两条素材原句完成竖屏 30 秒内脚本（revision 2），同一版脚本通过时长检查（预计 22.7 秒 ≤ 30 秒）与规则及自由文案审核。",
+  "brief": {
+    "schema_version": 1,
+    "topic": "介绍演示剪辑工具的字幕功能",
+    "audience": "刚开始制作短视频的创作者",
+    "platform": "抖音",
+    "target_duration_seconds": 30,
+    "style": "简洁自然，不夸张",
+    "product_id": "demo_editor"
+  },
+  "script": {
+    "estimated_total_seconds": 22.7,
+    "revision": 2,
+    "schema_version": 1,
+    "scenes": [
+      {
+        "citations": [],
+        "estimated_duration_seconds": 5.0,
+        "min_visual_seconds": 3.5,
+        "pause_seconds": 0.2,
+        "scene_id": "S1",
+        "subtitle": "没字幕，重点容易漏",
+        "visual": "竖屏近景：创作者坐在桌前回放手机里的视频，皱眉；画面下方出现手写字幕卡片“这句台词，没人听清”",
+        "voiceover": "视频拍完，回放发现：没字幕，重点容易漏。"
+      },
+      {
+        "citations": [
+          {
+            "claim": "支持字幕",
+            "fact_id": "P01-F01",
+            "material_id": "P01"
+          }
+        ],
+        "estimated_duration_seconds": 3.7,
+        "min_visual_seconds": 3.5,
+        "pause_seconds": 0.2,
+        "scene_id": "S2",
+        "subtitle": "演示剪辑工具支持字幕",
+        "visual": "竖屏：由手机切到屏幕示意卡片（仅示意，非真实界面），示例视频下方出现字幕轨道卡片，手指指过去",
+        "voiceover": "演示剪辑工具支持字幕。"
+      },
+      {
+        "citations": [
+          {
+            "claim": "支持手动修改字幕文字",
+            "fact_id": "P02-F01",
+            "material_id": "P02"
+          }
+        ],
+        "estimated_duration_seconds": 6.4,
+        "min_visual_seconds": 4.5,
+        "pause_seconds": 0.3,
+        "scene_id": "S3",
+        "subtitle": "支持手动修改字幕文字",
+        "visual": "竖屏特写：字幕卡片上有一处错字，创作者手指点中该行，文字被改写（示意卡片代指界面）",
+        "voiceover": "配上字幕，支持手动修改字幕文字，别扭的地方自己改。"
+      },
+      {
+        "citations": [],
+        "estimated_duration_seconds": 3.8,
+        "min_visual_seconds": 3.5,
+        "pause_seconds": 0.3,
+        "scene_id": "S4",
+        "subtitle": "字幕改顺，观众跟得上",
+        "visual": "竖屏：同一段视频上下分屏对比，上方无字幕、下方有字幕卡片，创作者点头",
+        "voiceover": "字幕改顺了，观众跟得上。"
+      },
+      {
+        "citations": [],
+        "estimated_duration_seconds": 3.8,
+        "min_visual_seconds": 3.5,
+        "pause_seconds": 0.3,
+        "scene_id": "S5",
+        "subtitle": "下一条视频：加字幕再发布",
+        "visual": "竖屏正面中景：创作者看镜头，抬手示意；画面出现文字卡片“下一条视频，先加字幕”",
+        "voiceover": "下一条视频，先加字幕再发布。"
+      }
+    ],
+    "title": "字幕功能，30秒看懂"
+  },
+  "checks": [
+    {
+      "tool": "check_rules",
+      "script_revision": 2,
+      "script_sha256": "3defa5b955f731be86dbac5556708c98b9e9da08a65eb33241057e2d016ea3a6",
+      "passed": true,
+      "summary": "引用、品牌规则及独立文案审核通过",
+      "details": {
+        "product_id": "demo_editor",
+        "materials_synthetic": true,
+        "rules_synthetic": true,
+        "issues": [],
+        "verified_citations": [
+          {
+            "scene_id": "S2",
+            "claim": "支持字幕",
+            "fact_id": "P01-F01",
+            "material_id": "P01"
+          },
+          {
+            "scene_id": "S3",
+            "claim": "支持手动修改字幕文字",
+            "fact_id": "P02-F01",
+            "material_id": "P02"
+          }
+        ],
+        "grounding_policy": {
+          "name": "exact_citations_and_semantic_review_v2",
+          "description": "标题、开场、转场和拍摄建议可自由创作；产品事实仍须在对应分镜引用素材原句及全部限定。自由文字由独立模型审核，不能新增产品能力、数据或承诺。",
+          "limitations": [
+            "模型审核可能误判，不等于事实真值证明；与生成器使用同一模型服务，存在相关错误。",
+            "素材只能证明其内部声明，不能证明真实产品能力；画面是拍摄建议，不是真实界面证据。"
+          ]
+        },
+        "limitations": [
+          "模型审核可能误判，不等于事实真值证明；与生成器使用同一模型服务，存在相关错误。",
+          "素材只能证明其内部声明，不能证明真实产品能力；画面是拍摄建议，不是真实界面证据。"
+        ],
+        "semantic_review": {
+          "sequence": 1,
+          "status": "ok",
+          "request_sha256": "b8610ae910b64393fca1b7901290258966c8b5de09775e70404afce31f0bf9e4",
+          "input": {
+            "policy": "exact_citations_and_semantic_review_v2",
+            "brief": {
+              "schema_version": 1,
+              "topic": "介绍演示剪辑工具的字幕功能",
+              "audience": "刚开始制作短视频的创作者",
+              "platform": "抖音",
+              "target_duration_seconds": 30,
+              "style": "简洁自然，不夸张",
+              "product_id": "demo_editor"
+            },
+            "script_revision": 2,
+            "brand_rules": [
+              {
+                "rule_id": "B01",
+                "kind": "forbidden_phrase",
+                "value": "效率提升80%",
+                "description": "合成品牌规则：不使用没有证据的效率宣传数字。此字面规则不替代事实核验。"
+              },
+              {
+                "rule_id": "B02",
+                "kind": "forbidden_phrase",
+                "value": "100%准确",
+                "description": "合成品牌规则：禁止绝对准确率承诺。"
+              },
+              {
+                "rule_id": "B03",
+                "kind": "forbidden_phrase",
+                "value": "永久免费",
+                "description": "合成品牌规则：未提供价格依据，不使用永久免费承诺。"
+              }
+            ],
+            "facts": {
+              "P01-F01": {
+                "material_id": "P01",
+                "fact_id": "P01-F01",
+                "statement": "支持字幕",
+                "qualifiers": []
+              },
+              "P02-F01": {
+                "material_id": "P02",
+                "fact_id": "P02-F01",
+                "statement": "支持手动修改字幕文字",
+                "qualifiers": []
+              }
+            },
+            "fields": [
+              {
+                "location": "title",
+                "text": "字幕功能，30秒看懂",
+                "allowed_fact_ids": [
+                  "P01-F01",
+                  "P02-F01"
+                ]
+              },
+              {
+                "location": "scenes.S1.visual",
+                "text": "竖屏近景：创作者坐在桌前回放手机里的视频，皱眉；画面下方出现手写字幕卡片“这句台词，没人听清”",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S1.voiceover",
+                "text": "视频拍完，回放发现：没字幕，重点容易漏。",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S1.subtitle",
+                "text": "没字幕，重点容易漏",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S2.visual",
+                "text": "竖屏：由手机切到屏幕示意卡片（仅示意，非真实界面），示例视频下方出现字幕轨道卡片，手指指过去",
+                "allowed_fact_ids": [
+                  "P01-F01"
+                ]
+              },
+              {
+                "location": "scenes.S2.voiceover",
+                "text": "演示剪辑工具支持字幕。",
+                "allowed_fact_ids": [
+                  "P01-F01"
+                ]
+              },
+              {
+                "location": "scenes.S2.subtitle",
+                "text": "演示剪辑工具支持字幕",
+                "allowed_fact_ids": [
+                  "P01-F01"
+                ]
+              },
+              {
+                "location": "scenes.S3.visual",
+                "text": "竖屏特写：字幕卡片上有一处错字，创作者手指点中该行，文字被改写（示意卡片代指界面）",
+                "allowed_fact_ids": [
+                  "P02-F01"
+                ]
+              },
+              {
+                "location": "scenes.S3.voiceover",
+                "text": "配上字幕，支持手动修改字幕文字，别扭的地方自己改。",
+                "allowed_fact_ids": [
+                  "P02-F01"
+                ]
+              },
+              {
+                "location": "scenes.S3.subtitle",
+                "text": "支持手动修改字幕文字",
+                "allowed_fact_ids": [
+                  "P02-F01"
+                ]
+              },
+              {
+                "location": "scenes.S4.visual",
+                "text": "竖屏：同一段视频上下分屏对比，上方无字幕、下方有字幕卡片，创作者点头",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S4.voiceover",
+                "text": "字幕改顺了，观众跟得上。",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S4.subtitle",
+                "text": "字幕改顺，观众跟得上",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S5.visual",
+                "text": "竖屏正面中景：创作者看镜头，抬手示意；画面出现文字卡片“下一条视频，先加字幕”",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S5.voiceover",
+                "text": "下一条视频，先加字幕再发布。",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S5.subtitle",
+                "text": "下一条视频：加字幕再发布",
+                "allowed_fact_ids": []
+              }
+            ]
+          },
+          "cache_hit": false,
+          "model": "deepseek-flash",
+          "content": "{\"fields\":[{\"location\":\"title\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"标题仅为观看时长与主题的引导，无产品能力断言。\"},{\"location\":\"scenes.S1.visual\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"画面为创作者回放视频及手写示意卡片，属情景描述，无产品能力声明。\"},{\"location\":\"scenes.S1.voiceover\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"描述无字幕时重点易漏的创作情景，未对产品作声明。\"},{\"location\":\"scenes.S1.subtitle\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"字幕与旁白情景一致，无产品能力断言。\"},{\"location\":\"scenes.S2.visual\",\"verdict\":\"supported\",\"fact_ids\":[\"P01-F01\"],\"reason\":\"画面明确标注仅为示意、非真实界面，仅呈现字幕轨道示意，与“支持字幕”事实一致。\"},{\"location\":\"scenes.S2.voiceover\",\"verdict\":\"supported\",\"fact_ids\":[\"P01-F01\"],\"reason\":\"“演示剪辑工具支持字幕”与事实P01-F01一致。\"},{\"location\":\"scenes.S2.subtitle\",\"verdict\":\"supported\",\"fact_ids\":[\"P01-F01\"],\"reason\":\"字幕表述与事实P01-F01的“支持字幕”一致。\"},{\"location\":\"scenes.S3.visual\",\"verdict\":\"supported\",\"fact_ids\":[\"P02-F01\"],\"reason\":\"以示意卡片代指界面演示修改错字，对应“支持手动修改字幕文字”，且已说明非真实界面。\"},{\"location\":\"scenes.S3.voiceover\",\"verdict\":\"supported\",\"fact_ids\":[\"P02-F01\"],\"reason\":\"“支持手动修改字幕文字”与事实P02-F01一致。\"},{\"location\":\"scenes.S3.subtitle\",\"verdict\":\"supported\",\"fact_ids\":[\"P02-F01\"],\"reason\":\"字幕表述与事实P02-F01一致。\"},{\"location\":\"scenes.S4.visual\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"画面为有无字幕的对比示意及创作者反应，属拍摄呈现，无明确产品能力断言。\"},{\"location\":\"scenes.S4.voiceover\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"“观众跟得上”是主观感受式收束，未作具体量化或产品能力声明。\"},{\"location\":\"scenes.S4.subtitle\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"与旁白一致的主观收束语，无产品能力断言。\"},{\"location\":\"scenes.S5.visual\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"结尾拍摄建议画面，含文字卡片提示，无产品能力声明。\"},{\"location\":\"scenes.S5.voiceover\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"结尾行动建议，未声明产品能力、效果或价格。\"},{\"location\":\"scenes.S5.subtitle\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"结尾行动建议字幕，无产品能力断言。\"}]}",
+          "tool_calls": [],
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1528,
+            "completion_tokens": 670,
+            "total_tokens": 2198
+          },
+          "review": {
+            "fields": [
+              {
+                "location": "title",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "标题仅为观看时长与主题的引导，无产品能力断言。"
+              },
+              {
+                "location": "scenes.S1.visual",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "画面为创作者回放视频及手写示意卡片，属情景描述，无产品能力声明。"
+              },
+              {
+                "location": "scenes.S1.voiceover",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "描述无字幕时重点易漏的创作情景，未对产品作声明。"
+              },
+              {
+                "location": "scenes.S1.subtitle",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "字幕与旁白情景一致，无产品能力断言。"
+              },
+              {
+                "location": "scenes.S2.visual",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P01-F01"
+                ],
+                "reason": "画面明确标注仅为示意、非真实界面，仅呈现字幕轨道示意，与“支持字幕”事实一致。"
+              },
+              {
+                "location": "scenes.S2.voiceover",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P01-F01"
+                ],
+                "reason": "“演示剪辑工具支持字幕”与事实P01-F01一致。"
+              },
+              {
+                "location": "scenes.S2.subtitle",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P01-F01"
+                ],
+                "reason": "字幕表述与事实P01-F01的“支持字幕”一致。"
+              },
+              {
+                "location": "scenes.S3.visual",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P02-F01"
+                ],
+                "reason": "以示意卡片代指界面演示修改错字，对应“支持手动修改字幕文字”，且已说明非真实界面。"
+              },
+              {
+                "location": "scenes.S3.voiceover",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P02-F01"
+                ],
+                "reason": "“支持手动修改字幕文字”与事实P02-F01一致。"
+              },
+              {
+                "location": "scenes.S3.subtitle",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P02-F01"
+                ],
+                "reason": "字幕表述与事实P02-F01一致。"
+              },
+              {
+                "location": "scenes.S4.visual",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "画面为有无字幕的对比示意及创作者反应，属拍摄呈现，无明确产品能力断言。"
+              },
+              {
+                "location": "scenes.S4.voiceover",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "“观众跟得上”是主观感受式收束，未作具体量化或产品能力声明。"
+              },
+              {
+                "location": "scenes.S4.subtitle",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "与旁白一致的主观收束语，无产品能力断言。"
+              },
+              {
+                "location": "scenes.S5.visual",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "结尾拍摄建议画面，含文字卡片提示，无产品能力声明。"
+              },
+              {
+                "location": "scenes.S5.voiceover",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "结尾行动建议，未声明产品能力、效果或价格。"
+              },
+              {
+                "location": "scenes.S5.subtitle",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "结尾行动建议字幕，无产品能力断言。"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "tool": "estimate_duration",
+      "script_revision": 2,
+      "script_sha256": "3defa5b955f731be86dbac5556708c98b9e9da08a65eb33241057e2d016ea3a6",
+      "passed": true,
+      "summary": "预计时长符合上限",
+      "details": {
+        "target_duration_seconds": 30,
+        "estimated_total_seconds": 22.7,
+        "over_by_seconds": 0.0,
+        "scenes": [
+          {
+            "scene_id": "S1",
+            "voiceover_seconds": 4.8,
+            "subtitle_reading_seconds": 1.6,
+            "min_visual_seconds": 3.5,
+            "pause_seconds": 0.2,
+            "estimated_duration_seconds": 5.0
+          },
+          {
+            "scene_id": "S2",
+            "voiceover_seconds": 2.7,
+            "subtitle_reading_seconds": 2.0,
+            "min_visual_seconds": 3.5,
+            "pause_seconds": 0.2,
+            "estimated_duration_seconds": 3.7
+          },
+          {
+            "scene_id": "S3",
+            "voiceover_seconds": 6.1,
+            "subtitle_reading_seconds": 2.0,
+            "min_visual_seconds": 4.5,
+            "pause_seconds": 0.3,
+            "estimated_duration_seconds": 6.4
+          },
+          {
+            "scene_id": "S4",
+            "voiceover_seconds": 2.9,
+            "subtitle_reading_seconds": 1.8,
+            "min_visual_seconds": 3.5,
+            "pause_seconds": 0.3,
+            "estimated_duration_seconds": 3.8
+          },
+          {
+            "scene_id": "S5",
+            "voiceover_seconds": 3.4,
+            "subtitle_reading_seconds": 2.2,
+            "min_visual_seconds": 3.5,
+            "pause_seconds": 0.3,
+            "estimated_duration_seconds": 3.8
+          }
+        ],
+        "policy": {
+          "spoken_characters_per_second": 4.0,
+          "spoken_words_per_second": 2.5,
+          "reading_characters_per_second": 5.0,
+          "reading_words_per_second": 3.0,
+          "punctuation_pause_seconds": 0.2
+        },
+        "method": "每镜 max(旁白含标点停顿的时长, 字幕阅读时长, 必要画面占用) + 额外停顿，向上取整到0.1秒后求和。",
+        "limitations": [
+          "中文及其他非英文文字按字符、数字逐位、英文按单词估算；不能代表实际成片时长。",
+          "忽略输入脚本中自报的估时；旁白与字幕同时呈现，取较长值而非相加。"
+        ]
+      }
+    }
+  ],
+  "risks": [
+    "素材仅覆盖「支持字幕」「支持手动修改字幕文字」两点，未涉及自动识别、样式、导出等能力，脚本未作相关描述；成片如需展示这些内容需补充素材。",
+    "画面中的字幕轨道与改字均为示意卡片，不是真实界面证据，成片不应剪入真实产品录屏以外的暗示。",
+    "检索与规则均为合成环境，事实与审核结论仅证明素材内部声明，不代表真实产品能力。",
+    "时长是规则估算；自由文案经模型审核，审核可能误判，实际发布前仍需人工复核。",
+    "本次资料为合成产品资料，不代表真实产品能力。"
+  ],
+  "requests_for_input": [],
+  "writing_mode": "creative"
+}

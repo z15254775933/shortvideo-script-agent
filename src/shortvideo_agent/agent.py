@@ -40,8 +40,12 @@ finish_task 必须单独调用，先观察其他工具结果。不能在同一�
 返回最终检查通过结果后及时结束，避免无意义重复调用。"""
 
 
-def agent_tool_definitions() -> list[dict]:
+def agent_tool_definitions(*, creative: bool = False) -> list[dict]:
     definitions = tool_definitions()
+    if creative:
+        for definition in definitions:
+            if definition["function"]["name"] == "check_rules":
+                definition["function"]["description"] = "检查素材原句引用、品牌规则，并独立审核自由文案是否新增无依据的产品断言。审核失败必须改稿或明确结束。"
     for definition in definitions:
         parameters = definition["function"]["parameters"]
         parameters["properties"]["reason_summary"] = TEXT
@@ -80,17 +84,32 @@ class Agent:
             "timeout_seconds": settings.timeout_seconds, "max_output_tokens": settings.max_output_tokens,
             **(metadata or {}),
         }
+        creative = registry.writing_mode == "creative"
+        policy = EDITORIAL_POLICY
+        prompt = SYSTEM_PROMPT
+        writing = {}
+        if creative:
+            from .grounding import CREATIVE_POLICY, writing_guidance
+            policy, writing = CREATIVE_POLICY, writing_guidance(self.brief)
+            prompt = prompt.replace(
+                "为保证可离线检查，其余标题、画面与连接文案使用政策短语，可选其中适合需求风格的表达。",
+                "标题、开场、转场、结尾与拍摄建议允许自由创作，依据 writing_guidance 适配受众、平台和风格。"
+                "产品事实仍使用对应素材原句并保留全部限定；每条事实引用须出现在对应分镜里。"
+                "自由文案会接受独立模型审核，审核失败、格式错误或超限均不能视为通过。"
+                "尽量输出可拍摄、有具体情境的脚本，避免用重复口号填充时长；不杜撰真实界面或操作步骤。")
+            self.metadata.update(writing_mode="creative", max_review_calls=registry.reviewer.max_calls)
         self._record("input_validation", "inspect_brief", observation={"missing_fields": missing_fields(self.brief)})
         if initial_script is not None:
             self._adopt(initial_script, origin="provided_input")
         self.messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": prompt},
             {"role": "user", "content": json_text({
                 "brief": self.brief, "missing_fields": missing_fields(self.brief),
                 "product_id": self.brief.get("product_id") or registry.rules["product_id"],
-                "brand_rules": registry.rules, "grounding_policy": EDITORIAL_POLICY,
+                "brand_rules": registry.rules, "grounding_policy": policy,
                 "initial_script": self.script,
                 "limits": {"max_steps": settings.max_steps, "max_tool_calls": settings.max_tool_calls},
+                **({"writing_guidance": writing} if creative else {}),
             })},
         ]
 
@@ -178,6 +197,22 @@ class Agent:
                 self.checks[name] = copy.deepcopy(result)
         return observation, None
 
+    def _model_observation(self, observation: dict) -> dict:
+        """Keep full audit data in Trace, send actionable findings to the agent."""
+        if self.registry.writing_mode != "creative":
+            return observation
+        compact = copy.deepcopy(observation)
+        details = compact.get("result", {}).get("details", {})
+        record = details.pop("semantic_review", None)
+        if record is not None:
+            details["semantic_review_summary"] = {
+                "status": record["status"], "sequence": record.get("sequence"),
+                "cache_hit": record.get("cache_hit", False),
+                "reviewed_fields": len(record.get("review", {}).get("fields", [])),
+                "error": record.get("error"),
+            }
+        return compact
+
     def _result(self, status: str, reason: str, *, requests: list | None = None,
                 risks: list | None = None) -> tuple[dict, dict]:
         final_script = copy.deepcopy(self.script)
@@ -187,6 +222,11 @@ class Agent:
             for scene, computed in zip(final_script["scenes"], timing["scenes"]):
                 scene["estimated_duration_seconds"] = computed["estimated_duration_seconds"]
         mandatory_risks = ["时长是固定规则下的估算，不代表实际成片；事实检查采用保守字面政策。"]
+        if self.registry.writing_mode == "creative":
+            mandatory_risks = ["时长是规则估算；自由文案经模型审核，审核可能误判，实际发布前仍需人工复核。"]
+            self.metadata.update(review_model_calls=self.registry.reviewer.calls,
+                                 review_records=copy.deepcopy(self.registry.reviewer.records),
+                                 total_model_calls=self.model_calls + self.registry.reviewer.calls)
         if self.mode == "mock":
             mandatory_risks.append("这是预设 Mock 执行流程，不证明真实模型决策效果。")
         if self.registry.materials["synthetic"]:
@@ -200,6 +240,7 @@ class Agent:
             "reason": reason, "brief": self.brief, "script": final_script,
             "checks": list(self.checks.values()), "risks": list(dict.fromkeys([*(risks or []), *mandatory_risks])),
             "requests_for_input": requests or [],
+            **({"writing_mode": "creative"} if self.registry.writing_mode == "creative" else {}),
         })
         self._record("final", "end_run", reason=reason, observation={"status": status,
                      "model_calls": self.model_calls, "tool_calls": self.tool_calls})
@@ -221,7 +262,8 @@ class Agent:
             self.model_calls += 1
             self._record("model_request", "choose_next_action", observation={"model_step": model_step})
             try:
-                reply: ModelReply = self.client.complete(self.messages, tools=agent_tool_definitions(),
+                reply: ModelReply = self.client.complete(self.messages, tools=agent_tool_definitions(
+                    creative=self.registry.writing_mode == "creative"),
                                                         max_tokens=self.settings.max_output_tokens)
             except ModelError as error:
                 self._record("model_response", "model_error", observation={"message": str(error)})
@@ -259,7 +301,8 @@ class Agent:
                     if not isinstance(error, json.JSONDecodeError):
                         observation["error"]["validation_summary"] = str(error)
                 self._record("tool_result", name, observation={"tool_call_id": call["id"], **observation})
-                self.messages.append({"role": "tool", "tool_call_id": call["id"], "content": json_text(observation)})
+                self.messages.append({"role": "tool", "tool_call_id": call["id"],
+                                      "content": json_text(self._model_observation(observation))})
                 if terminal:
                     return self._result(terminal["status"], terminal["reason"],
                                         requests=terminal["requests_for_input"], risks=terminal["risks"])
@@ -267,6 +310,8 @@ class Agent:
 
 
 def render_markdown(result: dict) -> str:
+    if result.get("writing_mode") == "creative":
+        return render_creative_markdown(result)
     lines = ["# 短视频脚本", "", f"状态：{result['status']}；运行模式：{result['mode']}", "", result["reason"], ""]
     script = result["script"]
     if script:
@@ -279,4 +324,33 @@ def render_markdown(result: dict) -> str:
     if result["requests_for_input"]:
         lines.extend(["## 需要补充", "", *[f"- {item}" for item in result["requests_for_input"]], ""])
     lines.extend(["## 风险与限制", "", *[f"- {item}" for item in result["risks"]], ""])
+    return "\n".join(lines)
+
+
+def render_creative_markdown(result: dict) -> str:
+    def cell(value):
+        return str(value).replace("|", "\\|").replace("\n", "<br>").replace("\r", "")
+
+    script = result["script"]
+    lines = [f"# {script['title'] if script else '短视频脚本'}", "",
+             f"状态：{result['status']}；运行模式：{result['mode']}；写作模式：creative", "", result["reason"], ""]
+    if script:
+        lines.extend([f"修订：{script['revision']}；预计总时长：{script['estimated_total_seconds']} 秒", "",
+                      "## 分镜时间轴", "", "| 镜头 | 时间（秒） | 画面与拍摄建议 | 旁白 | 字幕 | 来源 |",
+                      "| --- | --- | --- | --- | --- | --- |"])
+        elapsed = Decimal("0")
+        for scene in script["scenes"]:
+            duration = scene["estimated_duration_seconds"]
+            span = "未估算" if duration is None else f"{elapsed:.1f}—{elapsed + Decimal(str(duration)):.1f}"
+            if duration is not None:
+                elapsed += Decimal(str(duration))
+            sources = ", ".join(f"{c['material_id']}/{c['fact_id']}" for c in scene["citations"]) or "创意表达"
+            lines.append("| " + " | ".join(cell(value) for value in (
+                scene["scene_id"], span, scene["visual"], scene["voiceover"], scene["subtitle"], sources)) + " |")
+        lines.extend(["", "## 实际检查", ""])
+        for check in result["checks"]:
+            lines.append(f"- {check['tool']}：{'通过' if check['passed'] else '未通过'}；修订 {check['script_revision']}。{check['summary']}")
+    if result["requests_for_input"]:
+        lines.extend(["", "## 需要补充", "", *[f"- {item}" for item in result["requests_for_input"]]])
+    lines.extend(["", "## 风险与限制", "", *[f"- {item}" for item in result["risks"]], ""])
     return "\n".join(lines)

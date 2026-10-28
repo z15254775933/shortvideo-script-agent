@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "topic": "讲清演示剪辑工具已知的字幕功能及素材边界",
+  "audience": "有一定剪辑经验、希望看清功能依据的创作者",
+  "platform": "B站",
+  "target_duration_seconds": 30,
+  "style": "克制、解释型，先说明两条功能事实，再说明哪些能力尚无资料；不要把未知说成不支持",
+  "product_id": "demo_editor"
+}

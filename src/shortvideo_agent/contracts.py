@@ -85,6 +85,7 @@ RESULT = obj({
     "reason": TEXT, "brief": BRIEF, "script": {**SCRIPT, "type": ["object", "null"]},
     "checks": array(CHECK), "risks": array(TEXT), "requests_for_input": array(TEXT),
 })
+RESULT["properties"]["writing_mode"] = {"type": "string", "enum": ["creative", "strict"]}
 EVENT = obj({
     "step": {"type": "integer", "minimum": 1}, "timestamp": TEXT,
     "kind": {"type": "string", "enum": [

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "revision": 1,
+  "title": "开口说话，字幕自动来",
+  "scenes": [
+    {
+      "scene_id": "S1",
+      "visual": "创作者对着镜头说一句话；旁边放置字幕功能纸卡，仅作拍摄示意。",
+      "voiceover": "工具支持字幕。对着镜头说话，就能一键自动识别并生成字幕。",
+      "subtitle": "支持字幕；一键自动识别并生成字幕",
+      "pause_seconds": 0.2,
+      "min_visual_seconds": 4,
+      "estimated_duration_seconds": null,
+      "citations": [{"material_id": "P01", "fact_id": "P01-F01", "claim": "支持字幕"}]
+    },
+    {
+      "scene_id": "S2",
+      "visual": "拿出一张写有文字的纸卡，展示改字前后两个版本。",
+      "voiceover": "支持手动修改字幕文字。下一条视频，留意字幕是否表达清楚。",
+      "subtitle": "支持手动修改字幕文字",
+      "pause_seconds": 0.2,
+      "min_visual_seconds": 4,
+      "estimated_duration_seconds": null,
+      "citations": [{"material_id": "P02", "fact_id": "P02-F01", "claim": "支持手动修改字幕文字"}]
+    }
+  ],
+  "estimated_total_seconds": null
+}

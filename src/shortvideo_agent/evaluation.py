@@ -3,6 +3,7 @@
 import hashlib
 import json
 from decimal import Decimal
+from datetime import datetime
 from pathlib import Path, PureWindowsPath
 
 from .agent import render_markdown, utc_now
@@ -12,13 +13,15 @@ from .contracts import RESULT, TRACE, ValidationError, array, obj
 from .io_utils import read_json
 from .materials import load_assets
 from .tools import check_rules, estimate_duration, normalize, script_identity
+from .grounding import check_creative_rules, parse_review, request_fingerprint
 
 CASE_MANIFEST = obj({
     "schema_version": {"type": "integer", "const": 1},
     "cases": array(obj({
         "id": {"type": "string", "minLength": 1}, "description": {"type": "string", "minLength": 1},
         "kind": {"type": "string", "enum": ["normal", "missing", "no_materials", "tool_failure",
-                                                 "time_repair", "rule_repair", "limits", "comparison"]},
+                                                 "time_repair", "rule_repair", "limits", "comparison",
+                                                 "creative", "creative_repair"]},
         "paths": array({"type": "string", "minLength": 1}, 1),
     }), 1),
 })
@@ -64,6 +67,26 @@ def verify_loaded(result: dict, trace: dict, journal: list, materials: dict, rul
     require(trace["tool_calls"] == sum(event["kind"] == "tool_call" for event in journal), "Tool count mismatch")
     require(trace["model_calls"] <= trace["limits"]["max_steps"], "Model limit exceeded")
     require(trace["tool_calls"] <= trace["limits"]["max_tool_calls"], "Tool limit exceeded")
+    creative = trace["metadata"].get("writing_mode") == "creative"
+    require((result.get("writing_mode") == "creative") == creative, "Writing mode mismatch")
+    if creative:
+        metadata = trace["metadata"]
+        records = metadata["review_records"]
+        require(metadata["review_model_calls"] == len(records) <= metadata["max_review_calls"], "Review count or limit mismatch")
+        require(metadata["total_model_calls"] == trace["model_calls"] + len(records), "Total request count mismatch")
+        require([record["sequence"] for record in records] == list(range(1, len(records) + 1)), "Review sequence mismatch")
+        for record in records:
+            require(record["request_sha256"] == request_fingerprint(record["input"]), "Review request fingerprint mismatch")
+            if record["status"] == "ok":
+                require(record["finish_reason"] == "stop" and not record["tool_calls"], "Incomplete review response")
+                require(parse_review(record["content"], record["input"]) == record["review"], "Review response was changed")
+        for event in journal:
+            saved = event["observation"].get("result", {}).get("details", {}).get("semantic_review")
+            if event["kind"] == "tool_result" and saved and saved.get("sequence"):
+                require(1 <= saved["sequence"] <= len(records), "Review call record missing")
+                actual = records[saved["sequence"] - 1]
+                require({k: v for k, v in saved.items() if k != "cache_hit"} ==
+                        {k: v for k, v in actual.items() if k != "cache_hit"}, "Tool result differs from actual review response")
     if result["script"]:
         drafts = [event["observation"]["script"] for event in journal if event["kind"] == "draft_registered"]
         require(bool(drafts) and script_identity(drafts[-1]) == script_identity(result["script"]), "Final script differs from registered draft")
@@ -74,8 +97,17 @@ def verify_loaded(result: dict, trace: dict, journal: list, materials: dict, rul
     script = result["script"]
     computed = {
         "estimate_duration": estimate_duration(script, result["brief"]["target_duration_seconds"]),
-        "check_rules": check_rules(script, materials, rules, product_id=result["brief"].get("product_id")),
     }
+    saved_rules = next(check for check in result["checks"] if check["tool"] == "check_rules")
+    if creative:
+        record = saved_rules["details"].get("semantic_review")
+        require(record is not None and record.get("status") == "ok", "Success has no complete independent review")
+        try:
+            computed["check_rules"] = check_creative_rules(script, materials, rules, result["brief"], saved_record=record)
+        except ValueError:
+            raise AuditError("Stored creative review does not validate this script under current checks") from None
+    else:
+        computed["check_rules"] = check_rules(script, materials, rules, product_id=result["brief"].get("product_id"))
     for check in result["checks"]:
         require(check["passed"] and check == computed[check["tool"]], "Saved check differs from recomputed result")
         require(any(event["kind"] == "tool_result" and event["observation"].get("result") == check for event in journal), "Check has no actual tool-result event")
@@ -161,10 +193,31 @@ def audit_case(case: dict) -> dict:
     result, trace = bundle["result"], bundle["trace"]
     metrics = {"status": result["status"], "model_calls": trace["model_calls"], "tool_calls": trace["tool_calls"]}
     kind = case["kind"]
-    if kind in ("normal", "tool_failure", "time_repair", "rule_repair"):
+    if kind in ("normal", "tool_failure", "time_repair", "rule_repair", "creative", "creative_repair"):
         require(result["status"] == "success", "Case did not produce a checked script")
         metrics["estimated_seconds"] = result["script"]["estimated_total_seconds"]
-    if kind == "missing":
+    if kind in ("creative", "creative_repair"):
+        require(result.get("writing_mode") == "creative", "Case did not use independent creative review")
+        metrics.update(review_model_calls=trace["metadata"]["review_model_calls"],
+                       total_model_calls=trace["metadata"]["total_model_calls"])
+        metrics["elapsed_seconds"] = round((datetime.fromisoformat(trace["events"][-1]["timestamp"])
+                                             - datetime.fromisoformat(trace["started_at"])).total_seconds(), 3)
+        author_usage = [event["observation"].get("usage", {}) for event in trace["events"] if event["kind"] == "model_response"]
+        review_usage = [record.get("usage", {}) for record in trace["metadata"]["review_records"]]
+        metrics["tokens"] = {name: {key: sum(usage.get(key, 0) for usage in rows)
+                                    for key in ("prompt_tokens", "completion_tokens", "total_tokens")}
+                             for name, rows in (("author", author_usage), ("review", review_usage))}
+        require(not check_rules(result["script"], bundle["materials"], bundle["rules"])["passed"],
+                "Creative example did not exercise text outside the strict policy")
+        if kind == "creative_repair":
+            failed = next((event for event in results_for(trace, "check_rules")
+                           if event["observation"].get("status") == "ok"
+                           and any(issue["code"] == "semantic_unsupported" for issue in
+                                   event["observation"]["result"]["details"]["issues"])), None)
+            require(failed is not None, "No actual semantic failure observation")
+            changed_after_observation(trace, failed)
+            metrics["semantic_failure_event"] = failed["step"]
+    elif kind == "missing":
         require(result["status"] == "needs_input" and result["requests_for_input"] and result["script"] is None, "Missing information was not requested")
         require("target_duration_seconds" not in result["brief"], "Missing target was invented")
     elif kind == "no_materials":
@@ -224,5 +277,5 @@ def evaluate_manifest(path: Path) -> dict:
     return {"schema_version": 1, "kind": "acceptance_evaluation", "timestamp": utc_now(),
             "evidence_scope": "offline_audit_of_actual_saved_model_runs", "new_model_calls": 0,
             "total": len(rows), "passed": sum(row["passed"] for row in rows), "cases": rows,
-            "limitations": ["验收针对已保存样本及保守事实政策，不代表模型统计成功率或通用语义能力。",
+            "limitations": ["验收针对已保存样本，不代表模型统计成功率或通用语义能力。创作模式重放已存审核，不重新裁决自然语言真值。",
                             "C01 是两个受控单步决策，不是两次完整 Agent 任务。"]}

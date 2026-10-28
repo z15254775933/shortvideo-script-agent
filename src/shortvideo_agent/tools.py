@@ -303,11 +303,13 @@ class ToolRegistry:
     """Context-bound dispatcher; the caller/model decides subsequent actions."""
 
     def __init__(self, materials: dict, rules: dict, brief: dict,
-                 *, failures: dict[str, int] | None = None):
+                 *, failures: dict[str, int] | None = None, reviewer=None):
         validate_assets(materials, rules)
         validate(brief, BRIEF)
         self.materials, self.rules, self.brief = copy.deepcopy((materials, rules, brief))
         self.failures = dict(failures or {})
+        self.reviewer = reviewer
+        self.writing_mode = "creative" if reviewer is not None else "strict"
         for name, count in self.failures.items():
             if name not in TOOL_PARAMETERS:
                 raise ValidationError("Cannot inject a failure into an unknown tool")
@@ -331,12 +333,20 @@ class ToolRegistry:
             product_id = self.brief.get("product_id") or self.rules["product_id"]
             if name == "search_materials":
                 result = search_materials(self.materials, product_id=product_id, **arguments)
+                if self.reviewer is not None:
+                    from .grounding import CREATIVE_POLICY, writing_guidance
+                    result["grounding_policy"] = copy.deepcopy(CREATIVE_POLICY)
+                    result["writing_guidance"] = writing_guidance(self.brief)
             elif name == "estimate_duration":
                 target = self.brief.get("target_duration_seconds")
                 validate(target, POSITIVE, "brief.target_duration_seconds")
                 result = estimate_duration(arguments["script"], target)
             else:
-                result = check_rules(arguments["script"], self.materials, self.rules, product_id=product_id)
+                if self.reviewer is not None:
+                    from .grounding import check_creative_rules
+                    result = check_creative_rules(arguments["script"], self.materials, self.rules, self.brief, self.reviewer)
+                else:
+                    result = check_rules(arguments["script"], self.materials, self.rules, product_id=product_id)
             return {**envelope, "status": "ok", "result": result}
         except ValidationError as error:
             return {**envelope, "status": "error", "error": {

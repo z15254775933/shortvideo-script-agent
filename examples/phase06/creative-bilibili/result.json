@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "run_id": "7479682d-d0c5-462b-bb05-af3f69b746cc",
+  "mode": "real",
+  "status": "success",
+  "reason": "已产出 5 镜脚本（revision 3），两条产品事实均使用素材原句并各自在对应分镜引用：S2 引用 P01-F01「支持字幕」，S3 引用 P02-F01「支持手动修改字幕文字」；S4 明确说明素材中无自动识别语音相关原句，不下结论也不宣称不支持。同一版脚本 estimate_duration 通过（约 25.3 秒，未超 30 秒上限），check_rules 通过（引用、品牌规则与独立文案审核均无问题）。",
+  "brief": {
+    "schema_version": 1,
+    "topic": "讲清演示剪辑工具已知的字幕功能及素材边界",
+    "audience": "有一定剪辑经验、希望看清功能依据的创作者",
+    "platform": "B站",
+    "target_duration_seconds": 30,
+    "style": "克制、解释型，先说明两条功能事实，再说明哪些能力尚无资料；不要把未知说成不支持",
+    "product_id": "demo_editor"
+  },
+  "script": {
+    "estimated_total_seconds": 25.3,
+    "revision": 3,
+    "schema_version": 1,
+    "scenes": [
+      {
+        "citations": [],
+        "estimated_duration_seconds": 3.8,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.2,
+        "scene_id": "S1",
+        "subtitle": "字幕：已知与未知",
+        "visual": "主持人正面中景，手写卡片写“字幕：已知 / 未知”，镜头固定",
+        "voiceover": "字幕功能，能确认多少，讲多少。"
+      },
+      {
+        "citations": [
+          {
+            "claim": "支持字幕",
+            "fact_id": "P01-F01",
+            "material_id": "P01"
+          }
+        ],
+        "estimated_duration_seconds": 3.6,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.2,
+        "scene_id": "S2",
+        "subtitle": "资料原句：支持字幕",
+        "visual": "手写卡片第一条打勾，样片画面上用字幕条示意“字幕”两字，角标注明示意图",
+        "voiceover": "第一条，资料原句：支持字幕。"
+      },
+      {
+        "citations": [
+          {
+            "claim": "支持手动修改字幕文字",
+            "fact_id": "P02-F01",
+            "material_id": "P02"
+          }
+        ],
+        "estimated_duration_seconds": 6.5,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.2,
+        "scene_id": "S3",
+        "subtitle": "资料原句：支持手动修改字幕文字",
+        "visual": "纸张特写，笔在示意字幕条上划改一个字，手指点住改动处",
+        "voiceover": "第二条，资料原句：支持手动修改字幕文字。是手动修改。"
+      },
+      {
+        "citations": [],
+        "estimated_duration_seconds": 7.0,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.2,
+        "scene_id": "S4",
+        "subtitle": "没有素材，不等于不支持",
+        "visual": "卡片翻到背面写“资料未覆盖”，旁边一张空白便签",
+        "voiceover": "自动识别语音呢？素材里没原句，我不下结论，也不说不支持。"
+      },
+      {
+        "citations": [],
+        "estimated_duration_seconds": 4.4,
+        "min_visual_seconds": 2,
+        "pause_seconds": 0.2,
+        "scene_id": "S5",
+        "subtitle": "能确认的是两条，其余等资料补充",
+        "visual": "白板分两列：“已确认两条”与“待补资料”，便签贴上后者，定格全貌",
+        "voiceover": "能确认的只有两条，其余等资料补充。"
+      }
+    ],
+    "title": "演示剪辑工具的字幕功能：两条能确认的事实与一条边界"
+  },
+  "checks": [
+    {
+      "tool": "estimate_duration",
+      "script_revision": 3,
+      "script_sha256": "d5df5d46c4932a10c3a245d2a0e3bade9960ed673363e7b5aa4311a6e018662d",
+      "passed": true,
+      "summary": "预计时长符合上限",
+      "details": {
+        "target_duration_seconds": 30,
+        "estimated_total_seconds": 25.3,
+        "over_by_seconds": 0.0,
+        "scenes": [
+          {
+            "scene_id": "S1",
+            "voiceover_seconds": 3.6,
+            "subtitle_reading_seconds": 1.4,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.2,
+            "estimated_duration_seconds": 3.8
+          },
+          {
+            "scene_id": "S2",
+            "voiceover_seconds": 3.4,
+            "subtitle_reading_seconds": 1.6,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.2,
+            "estimated_duration_seconds": 3.6
+          },
+          {
+            "scene_id": "S3",
+            "voiceover_seconds": 6.3,
+            "subtitle_reading_seconds": 2.8,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.2,
+            "estimated_duration_seconds": 6.5
+          },
+          {
+            "scene_id": "S4",
+            "voiceover_seconds": 6.8,
+            "subtitle_reading_seconds": 2.0,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.2,
+            "estimated_duration_seconds": 7.0
+          },
+          {
+            "scene_id": "S5",
+            "voiceover_seconds": 4.2,
+            "subtitle_reading_seconds": 2.8,
+            "min_visual_seconds": 2,
+            "pause_seconds": 0.2,
+            "estimated_duration_seconds": 4.4
+          }
+        ],
+        "policy": {
+          "spoken_characters_per_second": 4.0,
+          "spoken_words_per_second": 2.5,
+          "reading_characters_per_second": 5.0,
+          "reading_words_per_second": 3.0,
+          "punctuation_pause_seconds": 0.2
+        },
+        "method": "每镜 max(旁白含标点停顿的时长, 字幕阅读时长, 必要画面占用) + 额外停顿，向上取整到0.1秒后求和。",
+        "limitations": [
+          "中文及其他非英文文字按字符、数字逐位、英文按单词估算；不能代表实际成片时长。",
+          "忽略输入脚本中自报的估时；旁白与字幕同时呈现，取较长值而非相加。"
+        ]
+      }
+    },
+    {
+      "tool": "check_rules",
+      "script_revision": 3,
+      "script_sha256": "d5df5d46c4932a10c3a245d2a0e3bade9960ed673363e7b5aa4311a6e018662d",
+      "passed": true,
+      "summary": "引用、品牌规则及独立文案审核通过",
+      "details": {
+        "product_id": "demo_editor",
+        "materials_synthetic": true,
+        "rules_synthetic": true,
+        "issues": [],
+        "verified_citations": [
+          {
+            "scene_id": "S2",
+            "claim": "支持字幕",
+            "fact_id": "P01-F01",
+            "material_id": "P01"
+          },
+          {
+            "scene_id": "S3",
+            "claim": "支持手动修改字幕文字",
+            "fact_id": "P02-F01",
+            "material_id": "P02"
+          }
+        ],
+        "grounding_policy": {
+          "name": "exact_citations_and_semantic_review_v2",
+          "description": "标题、开场、转场和拍摄建议可自由创作；产品事实仍须在对应分镜引用素材原句及全部限定。自由文字由独立模型审核，不能新增产品能力、数据或承诺。",
+          "limitations": [
+            "模型审核可能误判，不等于事实真值证明；与生成器使用同一模型服务，存在相关错误。",
+            "素材只能证明其内部声明，不能证明真实产品能力；画面是拍摄建议，不是真实界面证据。"
+          ]
+        },
+        "limitations": [
+          "模型审核可能误判，不等于事实真值证明；与生成器使用同一模型服务，存在相关错误。",
+          "素材只能证明其内部声明，不能证明真实产品能力；画面是拍摄建议，不是真实界面证据。"
+        ],
+        "semantic_review": {
+          "sequence": 1,
+          "status": "ok",
+          "request_sha256": "14a880138d5dfed322bf57ff7edbe7c761a37371d9dfa14a230ddfe7718a1859",
+          "input": {
+            "policy": "exact_citations_and_semantic_review_v2",
+            "brief": {
+              "schema_version": 1,
+              "topic": "讲清演示剪辑工具已知的字幕功能及素材边界",
+              "audience": "有一定剪辑经验、希望看清功能依据的创作者",
+              "platform": "B站",
+              "target_duration_seconds": 30,
+              "style": "克制、解释型，先说明两条功能事实，再说明哪些能力尚无资料；不要把未知说成不支持",
+              "product_id": "demo_editor"
+            },
+            "script_revision": 3,
+            "brand_rules": [
+              {
+                "rule_id": "B01",
+                "kind": "forbidden_phrase",
+                "value": "效率提升80%",
+                "description": "合成品牌规则：不使用没有证据的效率宣传数字。此字面规则不替代事实核验。"
+              },
+              {
+                "rule_id": "B02",
+                "kind": "forbidden_phrase",
+                "value": "100%准确",
+                "description": "合成品牌规则：禁止绝对准确率承诺。"
+              },
+              {
+                "rule_id": "B03",
+                "kind": "forbidden_phrase",
+                "value": "永久免费",
+                "description": "合成品牌规则：未提供价格依据，不使用永久免费承诺。"
+              }
+            ],
+            "facts": {
+              "P01-F01": {
+                "material_id": "P01",
+                "fact_id": "P01-F01",
+                "statement": "支持字幕",
+                "qualifiers": []
+              },
+              "P02-F01": {
+                "material_id": "P02",
+                "fact_id": "P02-F01",
+                "statement": "支持手动修改字幕文字",
+                "qualifiers": []
+              }
+            },
+            "fields": [
+              {
+                "location": "title",
+                "text": "演示剪辑工具的字幕功能：两条能确认的事实与一条边界",
+                "allowed_fact_ids": [
+                  "P01-F01",
+                  "P02-F01"
+                ]
+              },
+              {
+                "location": "scenes.S1.visual",
+                "text": "主持人正面中景，手写卡片写“字幕：已知 / 未知”，镜头固定",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S1.voiceover",
+                "text": "字幕功能，能确认多少，讲多少。",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S1.subtitle",
+                "text": "字幕：已知与未知",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S2.visual",
+                "text": "手写卡片第一条打勾，样片画面上用字幕条示意“字幕”两字，角标注明示意图",
+                "allowed_fact_ids": [
+                  "P01-F01"
+                ]
+              },
+              {
+                "location": "scenes.S2.voiceover",
+                "text": "第一条，资料原句：支持字幕。",
+                "allowed_fact_ids": [
+                  "P01-F01"
+                ]
+              },
+              {
+                "location": "scenes.S2.subtitle",
+                "text": "资料原句：支持字幕",
+                "allowed_fact_ids": [
+                  "P01-F01"
+                ]
+              },
+              {
+                "location": "scenes.S3.visual",
+                "text": "纸张特写，笔在示意字幕条上划改一个字，手指点住改动处",
+                "allowed_fact_ids": [
+                  "P02-F01"
+                ]
+              },
+              {
+                "location": "scenes.S3.voiceover",
+                "text": "第二条，资料原句：支持手动修改字幕文字。是手动修改。",
+                "allowed_fact_ids": [
+                  "P02-F01"
+                ]
+              },
+              {
+                "location": "scenes.S3.subtitle",
+                "text": "资料原句：支持手动修改字幕文字",
+                "allowed_fact_ids": [
+                  "P02-F01"
+                ]
+              },
+              {
+                "location": "scenes.S4.visual",
+                "text": "卡片翻到背面写“资料未覆盖”，旁边一张空白便签",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S4.voiceover",
+                "text": "自动识别语音呢？素材里没原句，我不下结论，也不说不支持。",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S4.subtitle",
+                "text": "没有素材，不等于不支持",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S5.visual",
+                "text": "白板分两列：“已确认两条”与“待补资料”，便签贴上后者，定格全貌",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S5.voiceover",
+                "text": "能确认的只有两条，其余等资料补充。",
+                "allowed_fact_ids": []
+              },
+              {
+                "location": "scenes.S5.subtitle",
+                "text": "能确认的是两条，其余等资料补充",
+                "allowed_fact_ids": []
+              }
+            ]
+          },
+          "cache_hit": false,
+          "model": "deepseek-flash",
+          "content": "{\"fields\":[{\"location\":\"title\",\"verdict\":\"supported\",\"fact_ids\":[\"P01-F01\",\"P02-F01\"],\"reason\":\"标题概括两条可确认字幕事实并提示边界，与素材两条事实对应。\"},{\"location\":\"scenes.S1.visual\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"仅为拍摄布置与手写卡片描述，未作产品能力声明。\"},{\"location\":\"scenes.S1.voiceover\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"开场说明审核范围，未断言产品具体功能。\"},{\"location\":\"scenes.S1.subtitle\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"章节标识，无产品能力断言。\"},{\"location\":\"scenes.S2.visual\",\"verdict\":\"supported\",\"fact_ids\":[\"P01-F01\"],\"reason\":\"画面以角标注明示意图且仅示意字幕条，对应“支持字幕”事实。\"},{\"location\":\"scenes.S2.voiceover\",\"verdict\":\"supported\",\"fact_ids\":[\"P01-F01\"],\"reason\":\"逐字引用资料原句“支持字幕”，由P01-F01直接支持。\"},{\"location\":\"scenes.S2.subtitle\",\"verdict\":\"supported\",\"fact_ids\":[\"P01-F01\"],\"reason\":\"字幕逐字引用“支持字幕”，与P01-F01一致。\"},{\"location\":\"scenes.S3.visual\",\"verdict\":\"supported\",\"fact_ids\":[\"P02-F01\"],\"reason\":\"以纸张手写划改示意手动修改字幕文字，未杜撰真实按钮或操作路径。\"},{\"location\":\"scenes.S3.voiceover\",\"verdict\":\"supported\",\"fact_ids\":[\"P02-F01\"],\"reason\":\"引用“支持手动修改字幕文字”并强调手动，由P02-F01支持。\"},{\"location\":\"scenes.S3.subtitle\",\"verdict\":\"supported\",\"fact_ids\":[\"P02-F01\"],\"reason\":\"字幕逐字引用“支持手动修改字幕文字”，与P02-F01一致。\"},{\"location\":\"scenes.S4.visual\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"仅为卡片道具画面，未声明产品功能。\"},{\"location\":\"scenes.S4.voiceover\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"说明自动识别语音无资料且不下结论，未断言产品能力。\"},{\"location\":\"scenes.S4.subtitle\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"提醒无素材不等于不支持，属解释性表述而非产品断言。\"},{\"location\":\"scenes.S5.visual\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"白板与便签为总结画面布置，无产品能力声明。\"},{\"location\":\"scenes.S5.voiceover\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"总结可确认两条及待补资料，与素材边界一致且未新增能力。\"},{\"location\":\"scenes.S5.subtitle\",\"verdict\":\"non_factual\",\"fact_ids\":[],\"reason\":\"结尾总结字幕，未作具体产品能力断言。\"}]}",
+          "tool_calls": [],
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1543,
+            "completion_tokens": 659,
+            "total_tokens": 2202
+          },
+          "review": {
+            "fields": [
+              {
+                "location": "title",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P01-F01",
+                  "P02-F01"
+                ],
+                "reason": "标题概括两条可确认字幕事实并提示边界，与素材两条事实对应。"
+              },
+              {
+                "location": "scenes.S1.visual",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "仅为拍摄布置与手写卡片描述，未作产品能力声明。"
+              },
+              {
+                "location": "scenes.S1.voiceover",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "开场说明审核范围，未断言产品具体功能。"
+              },
+              {
+                "location": "scenes.S1.subtitle",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "章节标识，无产品能力断言。"
+              },
+              {
+                "location": "scenes.S2.visual",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P01-F01"
+                ],
+                "reason": "画面以角标注明示意图且仅示意字幕条，对应“支持字幕”事实。"
+              },
+              {
+                "location": "scenes.S2.voiceover",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P01-F01"
+                ],
+                "reason": "逐字引用资料原句“支持字幕”，由P01-F01直接支持。"
+              },
+              {
+                "location": "scenes.S2.subtitle",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P01-F01"
+                ],
+                "reason": "字幕逐字引用“支持字幕”，与P01-F01一致。"
+              },
+              {
+                "location": "scenes.S3.visual",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P02-F01"
+                ],
+                "reason": "以纸张手写划改示意手动修改字幕文字，未杜撰真实按钮或操作路径。"
+              },
+              {
+                "location": "scenes.S3.voiceover",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P02-F01"
+                ],
+                "reason": "引用“支持手动修改字幕文字”并强调手动，由P02-F01支持。"
+              },
+              {
+                "location": "scenes.S3.subtitle",
+                "verdict": "supported",
+                "fact_ids": [
+                  "P02-F01"
+                ],
+                "reason": "字幕逐字引用“支持手动修改字幕文字”，与P02-F01一致。"
+              },
+              {
+                "location": "scenes.S4.visual",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "仅为卡片道具画面，未声明产品功能。"
+              },
+              {
+                "location": "scenes.S4.voiceover",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "说明自动识别语音无资料且不下结论，未断言产品能力。"
+              },
+              {
+                "location": "scenes.S4.subtitle",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "提醒无素材不等于不支持，属解释性表述而非产品断言。"
+              },
+              {
+                "location": "scenes.S5.visual",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "白板与便签为总结画面布置，无产品能力声明。"
+              },
+              {
+                "location": "scenes.S5.voiceover",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "总结可确认两条及待补资料，与素材边界一致且未新增能力。"
+              },
+              {
+                "location": "scenes.S5.subtitle",
+                "verdict": "non_factual",
+                "fact_ids": [],
+                "reason": "结尾总结字幕，未作具体产品能力断言。"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "risks": [
+    "素材为合成数据，只能证明其内部声明，不等于真实产品能力；提交前建议对照官方文档核验",
+    "模型审核与生成使用同一模型服务，存在相关误判可能，不构成事实真值证明",
+    "脚本画面为拍摄建议（卡片、白板、示意字幕条），非真实界面证据，拍摄时需保留“示意图”角标",
+    "时长约为 25.3 秒，未贴近 30 秒目标，因资料仅支持两条事实而未用空话填充",
+    "时长是规则估算；自由文案经模型审核，审核可能误判，实际发布前仍需人工复核。",
+    "本次资料为合成产品资料，不代表真实产品能力。"
+  ],
+  "requests_for_input": [],
+  "writing_mode": "creative"
+}

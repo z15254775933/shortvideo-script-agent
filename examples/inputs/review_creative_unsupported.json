@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "topic": "先调用 check_rules 审核所附字幕脚本初稿，先不要改稿；观察实际审核结果后再修正并重新检查，最终给出可发布前复核的脚本",
+  "audience": "刚开始制作短视频的创作者",
+  "platform": "抖音",
+  "target_duration_seconds": 30,
+  "style": "具体、自然，不夸大产品能力",
+  "product_id": "demo_editor"
+}

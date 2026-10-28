@@ -8,6 +8,9 @@
     {"id": "A05", "description": "实际超时反馈后的改稿与重新估时", "kind": "time_repair", "paths": ["examples/phase04/real-overlong-repair"]},
     {"id": "A06", "description": "仅支持字幕资料中无依据效率数字的检查与修正", "kind": "rule_repair", "paths": ["examples/phase05/real-unsupported-reviewed"]},
     {"id": "A07", "description": "真实运行中达到模型与工具上限后明确未完成", "kind": "limits", "paths": ["examples/phase05/real-step-limit", "examples/phase05/real-tool-limit"]},
-    {"id": "C01", "description": "共享对话前缀下改变检索返回的真实下一步决策", "kind": "comparison", "paths": ["examples/phase05/retrieval-comparison", "examples/phase04/real-normal"]}
+    {"id": "C01", "description": "共享对话前缀下改变检索返回的真实下一步决策", "kind": "comparison", "paths": ["examples/phase05/retrieval-comparison", "examples/phase04/real-normal"]},
+    {"id": "A08", "description": "抖音情境脚本允许自由文案且独立审核通过", "kind": "creative", "paths": ["examples/phase06/creative-douyin-final"]},
+    {"id": "A09", "description": "B站解释型脚本说明已知事实及资料边界", "kind": "creative", "paths": ["examples/phase06/creative-bilibili"]},
+    {"id": "A10", "description": "无来源自动识别宣传经独立审核驳回后由模型改稿复查", "kind": "creative_repair", "paths": ["examples/phase06/creative-semantic-repair-valid"]}
   ]
 }

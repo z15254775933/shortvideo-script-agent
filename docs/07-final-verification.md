@@ -1,4 +1,6 @@
-# 最终交付复核
+# 首次交付复核（0.1.0 历史快照）
+
+本页记录首次提交的 8 项验收和 81 项测试；0.2.0 当前功能与验证见 `docs/08-improvements.md`，最终 SHA 按当前分支查询。
 
 题号：4，短视频脚本 Agent。公开仓库：[z15254775933/shortvideo-script-agent](https://github.com/z15254775933/shortvideo-script-agent)，主分支 `main`。
 
